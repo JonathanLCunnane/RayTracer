@@ -93,4 +93,14 @@ public class TupleTest {
                 () -> Assertions.assertEquals(vOne.minus(vTwo), vvResult)
         );
     }
+
+    @Test
+    @DisplayName("Negating a vector")
+    public void negateVectorTest()
+    {
+        Vector v = new Vector(1, -2, 3);
+        v = v.negate();
+        Vector result = new Vector(-1, 2, -3);
+        Assertions.assertEquals(v, result);
+    }
 }
