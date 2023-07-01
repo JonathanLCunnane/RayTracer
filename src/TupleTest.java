@@ -103,4 +103,24 @@ public class TupleTest {
         Vector result = new Vector(-1, 2, -3);
         Assertions.assertEquals(v, result);
     }
+
+    @Test
+    @DisplayName("Multiplying a vector by a scalar")
+    public void scalarMultiplyVectorTest()
+    {
+        Vector v = new Vector(1, -2, 3);
+        v = v.scalarMultiply(3.5);
+        Vector result = new Vector(3.5, -7, 10.5);
+        Assertions.assertEquals(v, result);
+    }
+
+    @Test
+    @DisplayName("Dividing a vector by a scalar")
+    public void scalarDivideVectorTest()
+    {
+        Vector v = new Vector(1, -2, 3);
+        v = v.scalarDivide(2);
+        Vector result = new Vector(0.5, -1, 1.5);
+        Assertions.assertEquals(v, result);
+    }
 }
