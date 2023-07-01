@@ -156,4 +156,31 @@ public class TupleTest {
                 () -> Assertions.assertEquals(vTwo.normalised().magnitude(), 1)
         );
     }
+
+    @Test
+    @DisplayName("Dot product of two vectors")
+    public void vectorDotProductTest()
+    {
+        Vector vOne = new Vector(1, 2, 3);
+        Vector vTwo = new Vector(2, 3, 4);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(vOne.dot(vTwo), vTwo.dot(vOne)),
+                () -> Assertions.assertEquals(vOne.dot(vTwo), 20)
+        );
+
+    }
+
+    @Test
+    @DisplayName("Cross product of two vectors")
+    public void vectorCrossProductTest()
+    {
+        Vector vOne = new Vector(1, 2, 3);
+        Vector vTwo = new Vector(2, 3, 4);
+        Vector vResultOne = new Vector(-1, 2, -1);
+        Vector vResultTwo = new Vector(1, -2, 1);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(vOne.cross(vTwo), vResultOne),
+                () -> Assertions.assertEquals(vTwo.cross(vOne), vResultTwo)
+        );
+    }
 }
