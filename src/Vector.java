@@ -31,4 +31,18 @@ public class Vector extends Tuple {
         double mag = this.magnitude();
         return this.scalarDivide(mag);
     }
+
+    public double dot(Vector v)
+    {
+        return (x * v.x + y * v.y + z * v.z);
+    }
+
+    public Vector cross(Vector v)
+    {
+        return new Vector(
+                y * v.z - z * v.y,
+                z * v.x - x * v.z,
+                x * v.y - y * v.x
+        );
+    }
 }
