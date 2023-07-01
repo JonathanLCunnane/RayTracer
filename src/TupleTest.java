@@ -123,4 +123,37 @@ public class TupleTest {
         Vector result = new Vector(0.5, -1, 1.5);
         Assertions.assertEquals(v, result);
     }
+
+    @Test
+    @DisplayName("Finding the magnitude of a vector")
+    public void vectorMagnitudeTest()
+    {
+        Vector vOne = new Vector(1, 0, 0);
+        Vector vTwo = new Vector(0, 1, 0);
+        Vector vThree = new Vector(0, 0, 1);
+        Vector vFour = new Vector(1, 2, 3);
+        Vector vFive = new Vector(-1, -2, -3);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(vOne.magnitude(), 1),
+                () -> Assertions.assertEquals(vTwo.magnitude(), 1),
+                () -> Assertions.assertEquals(vThree.magnitude(), 1),
+                () -> Assertions.assertEquals(vFour.magnitude(), Math.pow(14, 0.5)),
+                () -> Assertions.assertEquals(vFive.magnitude(), Math.pow(14, 0.5))
+        );
+    }
+
+    @Test
+    @DisplayName("Finding the normalised vector of a vector")
+    public void vectorNormalisationTest()
+    {
+        Vector vOne = new Vector(4, 0, 0);
+        Vector vTwo = new Vector(1, 2, 3);
+        Vector vResultOne = new Vector(1, 0, 0);
+        Vector vResultTwo = new Vector(1/Math.pow(14, 0.5), 2/Math.pow(14, 0.5), 3/Math.pow(14, 0.5));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(vOne.normalised(), vResultOne),
+                () -> Assertions.assertEquals(vTwo.normalised(), vResultTwo),
+                () -> Assertions.assertEquals(vTwo.normalised().magnitude(), 1)
+        );
+    }
 }
