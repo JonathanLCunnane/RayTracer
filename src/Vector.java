@@ -8,4 +8,14 @@ public class Vector extends Tuple {
     {
         return new Vector(-x, -y, -z);
     }
+
+    public Vector scalarMultiply(double scalar)
+    {
+        return new Vector(x * scalar, y * scalar, z * scalar);
+    }
+
+    public Vector scalarDivide(double scalar)
+    {
+        return new Vector(x / scalar, y / scalar, z / scalar);
+    }
 }
