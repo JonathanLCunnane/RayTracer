@@ -36,8 +36,8 @@ public class Tuple {
     {
         if (obj == null) return null;
         Tuple newT = new Tuple(x + obj.x, y + obj.y, z + obj.z, w + obj.w);
-        if (Double.compare(newT.w, 2) == 0) throw new IllegalArgumentException(
-                "Cannot add a Point to a Point. Only a Vector can be added to a Point and a Vector to a Vector."
+        if (!(Double.compare(newT.w, 0) == 0 || Double.compare(newT.w, 1) == 0)) throw new IllegalArgumentException(
+                "Only a Vector can be added to a Point and a Vector to a Vector."
         );
         return newT;
     }
@@ -46,8 +46,8 @@ public class Tuple {
     {
         if (obj == null) return null;
         Tuple newT = new Tuple(x - obj.x, y - obj.y, z - obj.z, w - obj.w);
-        if (Double.compare(newT.w, -1) == 0) throw new IllegalArgumentException(
-                "Cannot subtract a Point from a Vector. Only a Vector can be subtracted from a Point and a Vector from a Vector."
+        if (!(Double.compare(newT.w, 0) == 0 || Double.compare(newT.w, 1) == 0)) throw new IllegalArgumentException(
+                "Only a Vector can be subtracted from a Point and a Vector from a Vector."
         );
         return newT;
     }
