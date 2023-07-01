@@ -2,6 +2,12 @@ public class Colour {
     double red;
     double green;
     double blue;
+    public Colour() // Default colour is black.
+    {
+        red = 0;
+        green = 0;
+        blue = 0;
+    }
     public Colour(double Red, double Green, double Blue)
     {
         red = Red;
