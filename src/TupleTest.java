@@ -49,11 +49,48 @@ public class TupleTest {
     @DisplayName("Vector class creates a tuple with w=0")
     public void vectorTupleEquivalencyTest()
     {
-        Vector p = new Vector(4, -4, 3);
+        Vector v = new Vector(4, -4, 3);
         Tuple t = new Tuple(4, -4, 3, 0);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(t, p),
-                () -> Assertions.assertEquals(p, t)
+                () -> Assertions.assertEquals(t, v),
+                () -> Assertions.assertEquals(v, t)
+        );
+    }
+
+    @Test
+    @DisplayName("Adding a point and a vector, and a vector and a vector")
+    public void tupleAdditionTest()
+    {
+        Point p = new Point(3, -2, 5);
+        Vector vOne = new Vector(4, -4, 3);
+        Vector vTwo = new Vector(-2, 3, 1);
+
+        Tuple pvResult = new Tuple(7, -6, 8, 1);
+        Tuple vvResult = new Tuple(2, -1, 4, 0);
+
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(p.plus(vOne), pvResult),
+                () -> Assertions.assertEquals(vOne.plus(vTwo), vvResult)
+        );
+    }
+
+    @Test
+    @DisplayName("Subtracting a point from a point, a vector from a point, and a vector from a vector")
+    public void tupleSubtractionTest()
+    {
+        Point pOne = new Point(3, -2, 5);
+        Point pTwo = new Point(3, 2, 1);
+        Vector vOne = new Vector(4, -4, 3);
+        Vector vTwo = new Vector(-2, 3, 1);
+
+        Tuple ppResult = new Tuple(0, -4, 4, 0);
+        Tuple pvResult = new Tuple(-1, 2, 2, 1);
+        Tuple vvResult = new Tuple(6, -7, 2, 0);
+
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(pOne.minus(pTwo), ppResult),
+                () -> Assertions.assertEquals(pOne.minus(vOne), pvResult),
+                () -> Assertions.assertEquals(vOne.minus(vTwo), vvResult)
         );
     }
 }
