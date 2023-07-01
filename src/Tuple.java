@@ -26,10 +26,10 @@ public class Tuple {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (!(obj instanceof Tuple t)) return false;
-        return Double.compare(t.x, x) == 0
-            && Double.compare(t.y, y) == 0
-            && Double.compare(t.z, z) == 0
-            && Double.compare(t.w, w) == 0;
+        return Math.abs(Double.compare(t.x, x)) <= 0.00001
+            && Math.abs(Double.compare(t.y, y)) <= 0.00001
+            && Math.abs(Double.compare(t.z, z)) <= 0.00001
+            && Math.abs(Double.compare(t.w, w)) <= 0.00001;
     }
 
     public Tuple plus(Tuple obj)
