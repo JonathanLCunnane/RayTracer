@@ -31,4 +31,24 @@ public class Tuple {
             && Double.compare(t.z, z) == 0
             && Double.compare(t.w, w) == 0;
     }
+
+    public Tuple plus(Tuple obj)
+    {
+        if (obj == null) return null;
+        Tuple newT = new Tuple(x + obj.x, y + obj.y, z + obj.z, w + obj.w);
+        if (Double.compare(newT.w, 2) == 0) throw new IllegalArgumentException(
+                "Cannot add a Point to a Point. Only a Vector can be added to a Point and a Vector to a Vector."
+        );
+        return newT;
+    }
+
+    public Tuple minus(Tuple obj)
+    {
+        if (obj == null) return null;
+        Tuple newT = new Tuple(x - obj.x, y - obj.y, z - obj.z, w - obj.w);
+        if (Double.compare(newT.w, -1) == 0) throw new IllegalArgumentException(
+                "Cannot subtract a Point from a Vector. Only a Vector can be subtracted from a Point and a Vector from a Vector."
+        );
+        return newT;
+    }
 }
