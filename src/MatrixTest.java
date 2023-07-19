@@ -73,4 +73,21 @@ public class MatrixTest {
         Matrix mTwo = new Matrix(4, 4, vTwo);
         Assertions.assertEquals(mOne, mTwo);
     }
+
+    @Test
+    @DisplayName("Matrices with different data should not be equal")
+    public void inequalityTest()
+    {
+        double[] vOne = new double[]
+                {
+                        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+                };
+        double[] vTwo = new double[]
+                {
+                        16, 2, 15, 4, 14, 6, 13, 8, 12, 10, 11, 1, 7, 3, 9, 5
+                };
+        Matrix mOne = new Matrix(4, 4, vOne);
+        Matrix mTwo = new Matrix(4, 4, vTwo);
+        Assertions.assertNotEquals(mOne, mTwo);
+    }
 }
