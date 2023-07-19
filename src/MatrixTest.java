@@ -90,4 +90,32 @@ public class MatrixTest {
         Matrix mTwo = new Matrix(4, 4, vTwo);
         Assertions.assertNotEquals(mOne, mTwo);
     }
+
+    @Test
+    @DisplayName("Matrices should be able to be multiplied correctly")
+    public void matrixMultiplication()
+    {
+        double[] vOne = new double[]
+                {
+                        1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2
+                };
+        double[] vTwo = new double[]
+                {
+                        -2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8
+                };
+        double[] vResult = new double[]
+                {
+                        20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42
+                };
+        Matrix mOne = new Matrix(4, 4, vOne);
+        Matrix mTwo = new Matrix(4, 4, vTwo);
+        Tuple t = new Tuple(1, 2, 3, 1);
+        Matrix mResult = new Matrix(4, 4, vResult);
+        Tuple tResult = new Tuple(18, 46, 52, 24);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(mOne.times(mTwo), mResult), // Multiplying two matrices to get a new matrix.
+                () -> Assertions.assertEquals(mOne.times(t), tResult) // Multiplying a matrix by a tuple to get a new tuple.
+        );
+
+    }
 }
