@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Matrix {
     private double[][] matrix;
     int rows;
@@ -16,6 +18,14 @@ public class Matrix {
         columns = columnNum;
         matrix = new double[rows][columns];
         initialiseMatrix(values);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Matrix m = (Matrix) o;
+        return rows == m.rows && columns == m.columns && Arrays.deepEquals(matrix, m.matrix);
     }
 
     private void initialiseMatrix(double[] values)
