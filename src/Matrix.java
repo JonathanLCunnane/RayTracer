@@ -34,14 +34,6 @@ public class Matrix {
         return true;
     }
 
-    private void initialiseMatrix(double[] values)
-    {
-        for (int r = 0; r < rows; r++)
-        {
-            System.arraycopy(values, (r * columns), matrix[r], 0, columns);
-        }
-    }
-
     private Tuple toTuple(Matrix m) // This method will only be used privately, so is unprotected.
     {
         return new Tuple(
@@ -50,6 +42,14 @@ public class Matrix {
                 m.valueAt(2, 0),
                 m.valueAt(3, 0)
         );
+    }
+
+    public void initialiseMatrix(double[] values)
+    {
+        for (int r = 0; r < rows; r++)
+        {
+            System.arraycopy(values, (r * columns), matrix[r], 0, columns);
+        }
     }
 
     public double valueAt(int row, int column)
