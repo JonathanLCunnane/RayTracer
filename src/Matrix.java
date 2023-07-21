@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Matrix {
     private double[][] matrix;
     int rows;
@@ -25,7 +23,15 @@ public class Matrix {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matrix m = (Matrix) o;
-        return rows == m.rows && columns == m.columns && Arrays.deepEquals(matrix, m.matrix);
+        if (rows != m.rows || columns != m.columns) return false;
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < columns; c++)
+            {
+                if ((matrix[r][c] - m.matrix[r][c]) > 0.00001) return false;
+            }
+        }
+        return true;
     }
 
     private void initialiseMatrix(double[] values)
@@ -99,5 +105,78 @@ public class Matrix {
             }
         }
         return result;
+    }
+
+    public double determinant()
+    {
+        if (columns != rows)
+        {
+            throw new IllegalArgumentException("Non-square matrices do not have determinants.");
+        }
+        if (rows == 2)
+        {
+            return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+        }
+        double det = 0;
+        for (int c = 0; c < columns; c++)
+        {
+            det += matrix[0][c] * cofactor(0, c);
+        }
+        return det;
+    }
+
+    public Matrix submatrix(int row, int column)
+    {
+        Matrix result = new Matrix(rows - 1, columns - 1);
+        int currResultRow = 0;
+        int currResultColumn;
+        for (int r = 0; r < rows; r++)
+        {
+            currResultColumn = 0;
+            if (r == row) continue;
+
+            for (int c = 0; c < columns; c++)
+            {
+                if (c == column) continue;
+                result.setAt(currResultRow, currResultColumn, matrix[r][c]);
+                currResultColumn++;
+            }
+            currResultRow++;
+        }
+        return result;
+    }
+
+    public double minor(int row, int column)
+    {
+        return submatrix(row, column).determinant();
+    }
+
+    public double cofactor(int row, int column)
+    {
+        if ((row + column) % 2 == 0) return submatrix(row, column).determinant();
+        return -submatrix(row, column).determinant();
+    }
+
+    public boolean isInvertible()
+    {
+        return (determinant() != 0);
+    }
+
+    public Matrix inverse()
+    {
+        if (columns != rows)
+        {
+            throw new IllegalArgumentException("Non-square matrices do not have inverses.");
+        }
+        Matrix result = new Matrix(rows, columns);
+        double det = determinant();
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < columns; c++)
+            {
+                result.setAt(r, c, cofactor(r, c) / det);
+            }
+        }
+        return result.transposed();
     }
 }
