@@ -152,4 +152,167 @@ public class MatrixTest {
         Matrix mResult = new Matrix(4, 4, r);
         Assertions.assertEquals(mInitial.transposed(), mResult);
     }
+
+    @Test
+    @DisplayName("Determinant of a 2x2 matrix")
+    public void twoTwoDeterminant()
+    {
+        double[] v = new double[]
+                {
+                        1, 5, -3, 2
+                };
+        Matrix m = new Matrix(2, 2, v);
+        Assertions.assertEquals(m.determinant(), 17);
+    }
+
+    @Test
+    @DisplayName("Determinant of a 3x3 matrix")
+    public void threeThreeDeterminant()
+    {
+        double[] v = new double[]
+                {
+                        1, 2, 6, -5, 8, -4, 2, 6, 4
+                };
+        Matrix m = new Matrix(3, 3, v);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.cofactor(0, 0), 56),
+                () -> Assertions.assertEquals(m.cofactor(0, 1), 12),
+                () -> Assertions.assertEquals(m.cofactor(0, 2), -46),
+                () -> Assertions.assertEquals(m.determinant(), -196)
+        );
+    }
+
+    @Test
+    @DisplayName("Determinant of a 4x4 matrix")
+    public void fourFourDeterminant()
+    {
+        double[] v = new double[]
+                {
+                        -2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9
+                };
+        Matrix m = new Matrix(4, 4, v);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.cofactor(0, 0), 690),
+                () -> Assertions.assertEquals(m.cofactor(0, 1), 447),
+                () -> Assertions.assertEquals(m.cofactor(0, 2), 210),
+                () -> Assertions.assertEquals(m.cofactor(0, 3), 51),
+                () -> Assertions.assertEquals(m.determinant(), -4071)
+        );
+    }
+
+    @Test
+    @DisplayName("Submatrices of matrices")
+    public void submatrices()
+    {
+        double[] vOne = new double[]
+                {
+                        1, 5, 0, -3, 2, 7, 0, 6, -3
+                };
+        double[] vTwo = new double[]
+                {
+                        -6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1
+                };
+        double[] rOne = new double[]
+                {
+                        -3, 2, 0, 6
+                };
+        double[] rTwo = new double[]
+                {
+                        -6, 1, 6, -8, 8, 6, -7, -1, 1
+                };
+        Matrix mOne = new Matrix(3, 3, vOne);
+        Matrix mTwo = new Matrix(4, 4, vTwo);
+        Matrix mROne = new Matrix(2, 2, rOne);
+        Matrix mRTwo = new Matrix(3, 3, rTwo);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(mOne.submatrix(0, 2), mROne),
+                () -> Assertions.assertEquals(mTwo.submatrix(2, 1), mRTwo)
+        );
+    }
+
+    @Test
+    @DisplayName("The minor of a matrix")
+    public void minor()
+    {
+        double[] v = new double[]
+                {
+                        3, 5, 0, 2, -1, -7, 6, -1, 5
+                };
+        Matrix m = new Matrix(3, 3, v);
+        Matrix subM = m.submatrix(1, 0);
+        Assertions.assertEquals(m.minor(1, 0), subM.determinant());
+    }
+
+    @Test
+    @DisplayName("The cofactors of a matrix")
+    public void cofactors()
+    {
+        double[] v = new double[]
+                {
+                        3, 5, 0, 2, -1, -7, 6, -1, 5
+                };
+        Matrix m = new Matrix(3, 3, v);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.minor(0, 0), -12),
+                () -> Assertions.assertEquals(m.cofactor(0, 0), -12),
+                () -> Assertions.assertEquals(m.minor(1, 0), 25),
+                () -> Assertions.assertEquals(m.cofactor(1, 0), -25)
+        );
+    }
+
+    @Test
+    @DisplayName("An invertible matrix should be invertible")
+    public void invertibleMatrix()
+    {
+        double[] v = new double[]
+                {
+                        6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6
+                };
+        Matrix m = new Matrix(4, 4, v);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.determinant(), -2120),
+                () -> Assertions.assertTrue(m.isInvertible())
+        );
+    }
+
+    @Test
+    @DisplayName("An non-invertible matrix should be non-invertible")
+    public void nonInvertibleMatrix()
+    {
+        double[] v = new double[]
+                {
+                        -4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0
+                };
+        Matrix m = new Matrix(4, 4, v);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.determinant(), 0),
+                () -> Assertions.assertFalse(m.isInvertible())
+        );
+    }
+
+    @Test
+    @DisplayName("Inverting a matrix")
+    public void inverseMatrix()
+    {
+        double[] v = new double[]
+                {
+                        -5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4
+                };
+        double[] r = new double[]
+                {
+                        0.21805, 0.45113, 0.24060, -0.04511, -0.80827, -1.45677, -0.44361, 0.52068, -0.07895, -0.22368,
+                        -0.05263, 0.19737, -0.52256, -0.81391, -0.30075, 0.30639
+                };
+        Matrix m = new Matrix(4, 4, v);
+        Matrix mInv = m.inverse();
+        Matrix mResult = new Matrix(4, 4, r);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.determinant(), 532),
+                () -> Assertions.assertEquals(m.cofactor(2, 3), -160),
+                () -> Assertions.assertEquals(m.cofactor(3, 2), 105),
+                () -> Assertions.assertEquals(mInv.valueAt(3, 2), (double) -160/532),
+                () -> Assertions.assertEquals(mInv.valueAt(2, 3), (double) 105/532),
+                () -> Assertions.assertEquals(mInv, mResult)
+        );
+    }
 }
