@@ -135,4 +135,21 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(i.times(t), t)
         );
     }
+
+    @Test
+    @DisplayName("Matrices should be correctly transposed")
+    public void matrixTransposition()
+    {
+        double[] v = new double[]
+                {
+                        0, 9, 3, 0, 9, 8, 0, 8, 1, 8, 5, 3, 0, 0, 5, 8
+                };
+        double[] r = new double[]
+                {
+                        0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8
+                };
+        Matrix mInitial = new Matrix(4, 4, v);
+        Matrix mResult = new Matrix(4, 4, r);
+        Assertions.assertEquals(mInitial.transposed(), mResult);
+    }
 }
