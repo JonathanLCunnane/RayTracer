@@ -116,6 +116,23 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(mOne.times(mTwo), mResult), // Multiplying two matrices to get a new matrix.
                 () -> Assertions.assertEquals(mOne.times(t), tResult) // Multiplying a matrix by a tuple to get a new tuple.
         );
+    }
 
+    @Test
+    @DisplayName("Matrices and tuples multiplied by the identity matrix should not change")
+    public void identityMultiplication()
+    {
+        double[] v = new double[]
+                {
+                        1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2
+                };
+        Matrix i = new IdentityMatrix(4);
+        Matrix m = new Matrix(4, 4, v);
+        Tuple t = new Tuple(1, 2, 3, 4);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.times(i), m),
+                () -> Assertions.assertEquals(i.times(m), m),
+                () -> Assertions.assertEquals(i.times(t), t)
+        );
     }
 }
