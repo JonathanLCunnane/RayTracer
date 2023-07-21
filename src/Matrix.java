@@ -87,4 +87,17 @@ public class Matrix {
                 };
         return toTuple(times(new Matrix(4, 1, v)));
     }
+
+    public Matrix transposed()
+    {
+        Matrix result = new Matrix(columns, rows);
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < columns; c++)
+            {
+                result.setAt(c, r, matrix[r][c]);
+            }
+        }
+        return result;
+    }
 }
