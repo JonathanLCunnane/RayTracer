@@ -315,4 +315,20 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(mInv, mResult)
         );
     }
+
+    @Test
+    @DisplayName("Translation matrices")
+    public void translationMatrices()
+    {
+        Matrix m = new TranslationMatrix(5, -3, 2);
+        Point p = new Point(-3, 4, 5);
+        Vector v = new Vector(-3, 4, 5);
+        Point pTransformed = new Point(2, 1, 7);
+        Point pInverseTransformed = new Point(-8, 7, 3);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.times(p), pTransformed),
+                () -> Assertions.assertEquals(m.inverse().times(p), pInverseTransformed),
+                () -> Assertions.assertEquals(m.times(v), v) // Vectors are unaffected by translations.
+        );
+    }
 }
