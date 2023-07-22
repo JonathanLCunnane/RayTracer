@@ -331,4 +331,21 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(m.times(v), v) // Vectors are unaffected by translations.
         );
     }
+
+    @Test
+    @DisplayName("Scaling matrices")
+    public void scalingMatrices()
+    {
+        Matrix m = new ScalingMatrix(2, 3, 4);
+        Point p = new Point(-4, 6, 8);
+        Vector v = new Vector(-4, 6, 8);
+        Point pTransformed = new Point(-8, 18, 32);
+        Vector vTransformed = new Vector(-8, 18, 32);
+        Vector vInverseTransformed = new Vector(-2, 2, 2);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(m.times(p), pTransformed),
+                () -> Assertions.assertEquals(m.inverse().times(v), vInverseTransformed),
+                () -> Assertions.assertEquals(m.times(v), vTransformed)
+        );
+    }
 }
