@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bfd0ef91-4396-4dcd-a039-d9c8cbf91d22" name="Changes" comment="Created a class for scaling matrices.">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_jupiter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2RxwtgHLyNOoHSq5RP4J63VJwsG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jonat/OneDrive/IdeaProjects/Ray Tracer/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jonat\OneDrive\IdeaProjects\Ray Tracer\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.All in Ray Tracer (1)">
+    <configuration name="All in Ray Tracer (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in Ray Tracer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PointTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TupleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TupleTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VectorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="VectorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in Ray Tracer (1)" />
+        <item itemvalue="JUnit.TupleTest" />
+        <item itemvalue="JUnit.VectorTest" />
+        <item itemvalue="JUnit.PointTest" />
+        <item itemvalue="JUnit.All in Ray Tracer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bfd0ef91-4396-4dcd-a039-d9c8cbf91d22" name="Changes" comment="" />
+      <created>1688205256164</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688205256164</updated>
+      <workItem from="1688205257197" duration="18951000" />
+      <workItem from="1689600258588" duration="19750000" />
+    </task>
+    <task id="LOCAL-00001" summary="Project Files.">
+      <option name="closed" value="true" />
+      <created>1688207358372</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688207358372</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Tuple class created.">
+      <option name="closed" value="true" />
+      <created>1688207428604</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688207428604</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added equivalence method.">
+      <option name="closed" value="true" />
+      <created>1688223839087</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688223839087</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Created point subclass for tuple.">
+      <option name="closed" value="true" />
+      <created>1688223877906</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688223877906</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Created vector subclass for tuple.">
+      <option name="closed" value="true" />
+      <created>1688223890510</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688223890510</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Moved all point and vector tests to TupleTest.java.">
+      <option name="closed" value="true" />
+      <created>1688225282812</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688225282812</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added plus and minus methods.">
+      <option name="closed" value="true" />
+      <created>1688226013266</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1688226013266</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added two methods for testing the plus and minus methods for tuples.">
+      <option name="closed" value="true" />
+      <created>1688226059927</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688226059927</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added vector negate method.">
+      <option name="closed" value="true" />
+      <created>1688227792420</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1688227792420</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added test for vector negate method.">
+      <option name="closed" value="true" />
+      <created>1688227813518</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1688227813518</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added methods for multiplying and dividing a vector by a scalar.">
+      <option name="closed" value="true" />
+      <created>1688228163214</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1688228163214</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added tests for multiplying and dividing a vector by a scalar.">
+      <option name="closed" value="true" />
+      <created>1688228177253</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1688228177253</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added methods for finding the magnitude and normal vector of a vector.">
+      <option name="closed" value="true" />
+      <created>1688228994114</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1688228994114</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added tests for finding the magnitude and normal vector of a vector.">
+      <option name="closed" value="true" />
+      <created>1688229002382</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1688229002382</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added methods for finding the dot and cross product of a vector with another vector.">
+      <option name="closed" value="true" />
+      <created>1688247521969</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688247521969</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added tests for finding the dot and cross product of a vector with another vector.">
+      <option name="closed" value="true" />
+      <created>1688247530847</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1688247530847</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated error checking for addition and subtraction of tuples.">
+      <option name="closed" value="true" />
+      <created>1688248083830</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1688248083830</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Updated tuple equality check.">
+      <option name="closed" value="true" />
+      <created>1688249822495</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1688249822495</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updated tuple equality check.">
+      <option name="closed" value="true" />
+      <created>1688250064525</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1688250064525</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Added colour class and unit tests.">
+      <option name="closed" value="true" />
+      <created>1688250081252</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1688250081252</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Added a default value for an instance of Colour.">
+      <option name="closed" value="true" />
+      <created>1688253418757</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1688253418757</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Added a class to represent a canvas">
+      <option name="closed" value="true" />
+      <created>1689600634664</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1689600634664</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Created tests for the new canvas class">
+      <option name="closed" value="true" />
+      <created>1689600653962</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1689600653962</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Added a class for matrix representation">
+      <option name="closed" value="true" />
+      <created>1689602167513</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1689602167513</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Added the first tests for the new matrix class">
+      <option name="closed" value="true" />
+      <created>1689602185204</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1689602185204</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added a method to test for equality">
+      <option name="closed" value="true" />
+      <created>1689793964300</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1689793964300</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Added a test for the matrix equality method">
+      <option name="closed" value="true" />
+      <created>1689793984533</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1689793984533</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated the test for the matrix equality method">
+      <option name="closed" value="true" />
+      <created>1689794337185</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1689794337185</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Added 'times' methods for multiplying a matrix by either a matrix or a tuple. Also fixed a critical error in the initialiseMatrix method.">
+      <option name="closed" value="true" />
+      <created>1689796131209</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1689796131209</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Added tests to ensure the matrix 'times' method is working for tuples and matrices">
+      <option name="closed" value="true" />
+      <created>1689796166909</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1689796166909</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Created an identity matrix class.">
+      <option name="closed" value="true" />
+      <created>1689963105085</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1689963105085</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Added identity matrix tests">
+      <option name="closed" value="true" />
+      <created>1689963122730</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1689963122730</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Added matrix transposition">
+      <option name="closed" value="true" />
+      <created>1689963372611</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1689963372611</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Added tests for matrix transposition">
+      <option name="closed" value="true" />
+      <created>1689963383325</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1689963383326</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Changed equals method and added a method for inverting a matrix (as well as all required methods for doing so)">
+      <option name="closed" value="true" />
+      <created>1689969124689</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1689969124690</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Created tests for the new method for inverting a matrix, as well as all the methods used in inverting the matrix.">
+      <option name="closed" value="true" />
+      <created>1689969172722</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1689969172722</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Changed the access level of initialiseMatrix to public from private.">
+      <option name="closed" value="true" />
+      <created>1689969649324</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1689969649324</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Added a class of matrix responsible for translations.">
+      <option name="closed" value="true" />
+      <created>1689970118011</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1689970118011</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Added tests for translation matrices">
+      <option name="closed" value="true" />
+      <created>1689970146091</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1689970146091</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added tests for scaling matrices">
+      <option name="closed" value="true" />
+      <created>1690055453086</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1690055453086</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Created a class for scaling matrices.">
+      <option name="closed" value="true" />
+      <created>1690055468989</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1690055468989</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added tests for finding the dot and cross product of a vector with another vector." />
+    <MESSAGE value="Updated error checking for addition and subtraction of tuples." />
+    <MESSAGE value="Updated tuple equality check." />
+    <MESSAGE value="Added colour class and unit tests." />
+    <MESSAGE value="Added a default value for an instance of Colour." />
+    <MESSAGE value="Added a class to represent a canvas" />
+    <MESSAGE value="Created tests for the new canvas class" />
+    <MESSAGE value="Added a class for matrix representation" />
+    <MESSAGE value="Added the first tests for the new matrix class" />
+    <MESSAGE value="Added a method to test for equality" />
+    <MESSAGE value="Added a test for the matrix equality method" />
+    <MESSAGE value="Updated the test for the matrix equality method" />
+    <MESSAGE value="Added 'times' methods for multiplying a matrix by either a matrix or a tuple. Also fixed a critical error in the initialiseMatrix method." />
+    <MESSAGE value="Added tests to ensure the matrix 'times' method is working for tuples and matrices" />
+    <MESSAGE value="Created an identity matrix class." />
+    <MESSAGE value="Added identity matrix tests" />
+    <MESSAGE value="Added matrix transposition" />
+    <MESSAGE value="Added tests for matrix transposition" />
+    <MESSAGE value="Changed equals method and added a method for inverting a matrix (as well as all required methods for doing so)" />
+    <MESSAGE value="Created tests for the new method for inverting a matrix, as well as all the methods used in inverting the matrix." />
+    <MESSAGE value="Changed the access level of initialiseMatrix to public from private." />
+    <MESSAGE value="Added a class of matrix responsible for translations." />
+    <MESSAGE value="Added tests for translation matrices" />
+    <MESSAGE value="Added tests for scaling matrices" />
+    <MESSAGE value="Created a class for scaling matrices." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a class for scaling matrices." />
+  </component>
+</project>
