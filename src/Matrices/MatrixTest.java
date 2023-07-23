@@ -348,4 +348,51 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(m.times(v), vTransformed)
         );
     }
+
+    @Test
+    @DisplayName("Rotation matrix around the x axis, and the inverse")
+    public void xRotationMatrix()
+    {
+        Matrix eighth = new XRotationMatrix(Math.PI/4);
+        Matrix quarter = new XRotationMatrix(Math.PI/2);
+        Point p = new Point(0, 1, 0);
+        Point pEighth = new Point(0, Math.sqrt(2)/2, Math.sqrt(2)/2);
+        Point pQuarter = new Point(0, 0, 1);
+        Point pInverseEighth = new Point(0, Math.sqrt(2)/2, -Math.sqrt(2)/2);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(eighth.times(p), pEighth),
+                () -> Assertions.assertEquals(eighth.inverse().times(p), pInverseEighth),
+                () -> Assertions.assertEquals(quarter.times(p), pQuarter)
+        );
+    }
+
+    @Test
+    @DisplayName("Rotation matrix around the y axis")
+    public void yRotationMatrix()
+    {
+        Matrix eighth = new YRotationMatrix(Math.PI/4);
+        Matrix quarter = new YRotationMatrix(Math.PI/2);
+        Point p = new Point(0, 0, 1);
+        Point pEighth = new Point(Math.sqrt(2)/2, 0, Math.sqrt(2)/2);
+        Point pQuarter = new Point(1, 0, 0);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(eighth.times(p), pEighth),
+                () -> Assertions.assertEquals(quarter.times(p), pQuarter)
+        );
+    }
+
+    @Test
+    @DisplayName("Rotation matrix around the z axis")
+    public void zRotationMatrix()
+    {
+        Matrix eighth = new ZRotationMatrix(Math.PI/4);
+        Matrix quarter = new ZRotationMatrix(Math.PI/2);
+        Point p = new Point(0, 1, 0);
+        Point pEighth = new Point(-Math.sqrt(2)/2, Math.sqrt(2)/2, 0);
+        Point pQuarter = new Point(-1, 0, 0);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(eighth.times(p), pEighth),
+                () -> Assertions.assertEquals(quarter.times(p), pQuarter)
+        );
+    }
 }
