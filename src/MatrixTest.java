@@ -395,4 +395,31 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(quarter.times(p), pQuarter)
         );
     }
+
+    @Test
+    @DisplayName("Shearing matrices")
+    public void shearingMatrices()
+    {
+        Point p = new Point(2, 3, 4);
+        Matrix xPropToY = new ShearingMatrix(1, 0, 0, 0, 0, 0);
+        Point pXY = new Point(5, 3, 4);
+        Matrix xPropToZ = new ShearingMatrix(0, 1, 0, 0, 0, 0);
+        Point pXZ = new Point(6, 3, 4);
+        Matrix yPropToX = new ShearingMatrix(0, 0, 1, 0, 0, 0);
+        Point pYX = new Point(2, 5, 4);
+        Matrix yPropToZ = new ShearingMatrix(0, 0, 0, 1, 0, 0);
+        Point pYZ = new Point(2, 7, 4);
+        Matrix zPropToX = new ShearingMatrix(0, 0, 0, 0, 1, 0);
+        Point pZX = new Point(2, 3, 6);
+        Matrix zPropToY = new ShearingMatrix(0, 0, 0, 0, 0, 1);
+        Point pZY = new Point(2, 3, 7);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(xPropToY.times(p), pXY),
+                () -> Assertions.assertEquals(xPropToZ.times(p), pXZ),
+                () -> Assertions.assertEquals(yPropToX.times(p), pYX),
+                () -> Assertions.assertEquals(yPropToZ.times(p), pYZ),
+                () -> Assertions.assertEquals(zPropToX.times(p), pZX),
+                () -> Assertions.assertEquals(zPropToY.times(p), pZY)
+        );
+    }
 }
