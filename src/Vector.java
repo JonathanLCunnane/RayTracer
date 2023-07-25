@@ -32,7 +32,7 @@ public class Vector extends Tuple {
         return this.scalarDivide(mag);
     }
 
-    public double dot(Vector v)
+    public double dot(Tuple v)
     {
         return (x * v.x + y * v.y + z * v.z);
     }
