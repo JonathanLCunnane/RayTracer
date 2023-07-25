@@ -3,4 +3,10 @@ public class Point extends Tuple {
     {
         super(X, Y, Z, 1);
     }
+
+    public Point(Tuple t)
+    {
+        super(t.x, t.y, t.z, t.w);
+        if (!t.isPoint()) throw new IllegalArgumentException("A tuple that is not a pint cannot be passed into the Point constructor.");
+    }
 }

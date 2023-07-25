@@ -6,6 +6,12 @@ public class Vector extends Tuple {
         super(X, Y, Z, 0);
     }
 
+    public Vector(Tuple t)
+    {
+        super(t.x, t.y, t.z, t.w);
+        if (!t.isVector()) throw new IllegalArgumentException("A tuple that is not a vector cannot be passed into the Vector constructor.");
+    }
+
     public Vector negate()
     {
         return new Vector(-x, -y, -z);
