@@ -5,7 +5,14 @@ public class Intersections {
     public int size;
     public Intersections(Intersection[] xs)
     {
-        intersections = xs;
+        Intersection[] xsCopy = xs.clone();
+        Arrays.sort(xsCopy, (iOne, iTwo) -> {
+            double diff = iOne.time - iTwo.time;
+            if (diff > 0) return 1;
+            else if (diff <= 0.00001 && diff >= -0.00001) return 0;
+            return -1;
+        });
+        intersections = xsCopy;
         size = xs.length;
     }
 
@@ -15,6 +22,6 @@ public class Intersections {
         if (o == null || getClass() != o.getClass()) return false;
         Intersections xs = (Intersections) o;
         if (xs.size != size) return false;
-        return Arrays.equals(Arrays.stream(xs.intersections.clone()).sorted().toArray(), Arrays.stream(intersections.clone()).sorted().toArray());
+        return Arrays.equals(xs.intersections, intersections);
     }
 }
