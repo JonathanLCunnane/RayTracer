@@ -24,4 +24,13 @@ public class Intersections {
         if (xs.size != size) return false;
         return Arrays.equals(xs.intersections, intersections);
     }
+
+    public Intersection hit()
+    {
+        for (Intersection i: intersections)
+        {
+            if (i.time >= 0) return i;
+        }
+        return null;
+    }
 }
