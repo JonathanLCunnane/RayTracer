@@ -30,4 +30,24 @@ public class RayTest {
                 () -> Assertions.assertEquals(r.position(2.5), new Point(4.5, 3, 4))
         );
     }
+
+    @Test
+    @DisplayName("Applying matrix tranformations to rays")
+    public void rayTransformations()
+    {
+        Ray r = new Ray(
+                new Point(1, 2, 3),
+                new Vector(0, 1, 0)
+        );
+        Matrix mTranslate = new TranslationMatrix(3, 4, 5);
+        Ray rTranslated = r.transform(mTranslate);
+        Matrix mScaling = new ScalingMatrix(2, 3, 4);
+        Ray rScaled = r.transform(mScaling);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(rTranslated.origin, new Point(4, 6, 8)),
+                () -> Assertions.assertEquals(rTranslated.direction, new Vector(0, 1, 0)),
+                () -> Assertions.assertEquals(rScaled.origin, new Point(2, 6, 12)),
+                () -> Assertions.assertEquals(rScaled.direction, new Vector(0, 3, 0))
+        );
+    }
 }
