@@ -20,6 +20,8 @@ public class Sphere {
 
     public Intersections intersections(Ray ray)
     {
+        ray = ray.transform(transform.inverse()); // We will transform the ray with the inverse transformation of the
+                                                  // sphere, instead of transforming the sphere, as this is easier.
         // From https://en.wikipedia.org/wiki/Line–sphere_intersection
         Point o = ray.origin;
         Vector u = ray.direction;
@@ -28,7 +30,7 @@ public class Sphere {
         double b = 2 * u.dot(omc);
         double c = omc.dot(omc) - Math.pow(r, 2);
         double delta = Math.pow(b, 2) - (4 * a * c);
-        if (delta < 0) return null;
+        if (delta < 0) return new Intersections(new Intersection[0]);
         double tOne = (- b - Math.pow(delta, 0.5)) / (2 * a);
         double tTwo = (- b + Math.pow(delta, 0.5)) / (2 * a);
         Intersection[] xs = new Intersection[]
