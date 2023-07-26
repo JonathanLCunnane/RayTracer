@@ -1,10 +1,12 @@
 public class Sphere {
     public Point c;
     public double r;
+    public Matrix transform;
     public Sphere()
     {
         c = new Point(0, 0,0);
         r = 1;
+        transform = new IdentityMatrix(4);
     }
 
     @Override
@@ -35,5 +37,10 @@ public class Sphere {
                         new Intersection(this, tTwo)
                 };
         return new Intersections(xs);
+    }
+
+    public void setTransform(Matrix m)
+    {
+        transform = m;
     }
 }
