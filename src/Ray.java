@@ -11,4 +11,12 @@ public class Ray {
     {
         return origin.plus(direction.scalarMultiply(time));
     }
+
+    public Ray transform(Matrix m)
+    {
+        return new Ray(
+                new Point(m.times(origin)),
+                new Vector(m.times(direction))
+        );
+    }
 }
