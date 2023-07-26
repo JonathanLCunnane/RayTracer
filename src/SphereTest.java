@@ -46,4 +46,22 @@ public class SphereTest {
                 () -> Assertions.assertEquals(xs.intersections[1].time, 1)
         );
     }
+
+    @Test
+    @DisplayName("A sphere should have a correct default transformation of the identity matrix")
+    public void defaultTransform()
+    {
+        Sphere s = new Sphere();
+        Assertions.assertEquals(s.transform, new IdentityMatrix(4));
+    }
+
+    @Test
+    @DisplayName("A sphere should be able to have new transforms correctly applied")
+    public void changingSphereTransform()
+    {
+        Sphere s = new Sphere();
+        Matrix m = new TranslationMatrix(2, 3, 4);
+        s.setTransform(m);
+        Assertions.assertEquals(s.transform, m);
+    }
 }
