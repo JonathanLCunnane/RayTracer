@@ -5,14 +5,19 @@ public class Intersections {
     public int size;
     public Intersections(Intersection[] xs)
     {
-        Intersection[] xsCopy = xs.clone();
-        Arrays.sort(xsCopy, (iOne, iTwo) -> {
-            double diff = iOne.time - iTwo.time;
-            if (diff > 0) return 1;
-            else if (diff <= 0.00001 && diff >= -0.00001) return 0;
-            return -1;
-        });
-        intersections = xsCopy;
+        // If xs is not empty, then sort it.
+        if (xs.length != 0)
+        {
+            Intersection[] xsCopy = xs.clone();
+            Arrays.sort(xsCopy, (iOne, iTwo) -> {
+                double diff = iOne.time - iTwo.time;
+                if (diff > 0) return 1;
+                else if (diff <= 0.00001 && diff >= -0.00001) return 0;
+                return -1;
+            });
+            intersections = xsCopy;
+        }
+        else intersections = xs;
         size = xs.length;
     }
 
