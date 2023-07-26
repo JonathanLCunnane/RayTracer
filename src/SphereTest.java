@@ -64,4 +64,40 @@ public class SphereTest {
         s.setTransform(m);
         Assertions.assertEquals(s.transform, m);
     }
+
+    @Test
+    @DisplayName("A scaled sphere should still be able to correctly produce intersection values")
+    public void scaledSphereIntersections()
+    {
+        Sphere s = new Sphere();
+        Ray r = new Ray(
+                new Point(0, 0, -5),
+                new Vector(0, 0, 1)
+        );
+        s.setTransform(
+                new ScalingMatrix(2, 2, 2)
+        );
+        Intersections xs = s.intersections(r);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(xs.size, 2),
+                () -> Assertions.assertEquals(xs.intersections[0].time, 3),
+                () -> Assertions.assertEquals(xs.intersections[1].time, 7)
+        );
+    }
+
+    @Test
+    @DisplayName("A translated sphere should still be able to correctly produce intersection values")
+    public void translatedSphereIntersections()
+    {
+        Sphere s = new Sphere();
+        Ray r = new Ray(
+                new Point(0, 0, -5),
+                new Vector(0, 0, 1)
+        );
+        s.setTransform(
+                new TranslationMatrix(5, 0, 0)
+        );
+        Intersections xs = s.intersections(r);
+        Assertions.assertEquals(xs.size, 0);
+    }
 }
