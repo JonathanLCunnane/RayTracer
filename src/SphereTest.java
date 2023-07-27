@@ -160,4 +160,23 @@ public class SphereTest {
         Vector n = s.normalAt(new Point(0, Math.sqrt(2)/2, -Math.sqrt(2)/2));
         Assertions.assertEquals(n, new Vector(0, 0.97014, -0.24254));
     }
+
+    @Test
+    @DisplayName("A sphere has a default material")
+    public void defaultMaterial()
+    {
+        Sphere s = new Sphere();
+        Assertions.assertEquals(s.material, new Material());
+    }
+
+    @Test
+    @DisplayName("A sphere's material may be assigned")
+    public void assigningMaterial()
+    {
+        Sphere s = new Sphere();
+        Material m = new Material();
+        m.ambient = 1;
+        s.material = m;
+        Assertions.assertEquals(s.material, m);
+    }
 }
