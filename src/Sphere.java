@@ -2,11 +2,13 @@ public class Sphere {
     public Point c;
     public double r;
     public Matrix transform;
+    public Material material;
     public Sphere()
     {
         c = new Point(0, 0,0);
         r = 1;
         transform = new IdentityMatrix(4);
+        material = new Material();
     }
 
     @Override
