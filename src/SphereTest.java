@@ -100,4 +100,64 @@ public class SphereTest {
         Intersections xs = s.intersections(r);
         Assertions.assertEquals(xs.size, 0);
     }
+
+    @Test
+    @DisplayName("The normal on a sphere at a point on the x axis")
+    public void xAxisNormal()
+    {
+        Sphere s = new Sphere();
+        Vector n = s.normalAt(new Point(1, 0, 0));
+        Assertions.assertEquals(n, new Vector(1, 0, 0));
+    }
+
+    @Test
+    @DisplayName("The normal on a sphere at a point on the y axis")
+    public void yAxisNormal()
+    {
+        Sphere s = new Sphere();
+        Vector n = s.normalAt(new Point(0, 1, 0));
+        Assertions.assertEquals(n, new Vector(0, 1, 0));
+    }
+
+    @Test
+    @DisplayName("The normal on a sphere at a point on the z axis")
+    public void zAxisNormal()
+    {
+        Sphere s = new Sphere();
+        Vector n = s.normalAt(new Point(0, 0, 1));
+        Assertions.assertEquals(n, new Vector(0, 0, 1));
+    }
+
+    @Test
+    @DisplayName("The normal on a sphere at a certain point is correct and normalised")
+    public void certainPointNormal()
+    {
+        Sphere s = new Sphere();
+        Vector n = s.normalAt(new Point(Math.sqrt(3)/3, Math.sqrt(3)/3, Math.sqrt(3)/3));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(n, new Vector(Math.sqrt(3)/3, Math.sqrt(3)/3, Math.sqrt(3)/3)),
+                () -> Assertions.assertEquals(n, n.normalised())
+        );
+    }
+
+    @Test
+    @DisplayName("The normal on a translated sphere")
+    public void translatedSphereNormal()
+    {
+        Sphere s = new Sphere();
+        s.setTransform(new TranslationMatrix(0, 1, 0));
+        Vector n = s.normalAt(new Point(0, 1.70711, -0.70711));
+        Assertions.assertEquals(n, new Vector(0, 0.70711, -0.70711));
+    }
+
+    @Test
+    @DisplayName("The normal on a transformed sphere")
+    public void transformedSphereNormal()
+    {
+        Sphere s = new Sphere();
+        Matrix transform = new ScalingMatrix(1, 0.5, 1).times(new ZRotationMatrix(Math.PI/5));
+        s.setTransform(transform);
+        Vector n = s.normalAt(new Point(0, Math.sqrt(2)/2, -Math.sqrt(2)/2));
+        Assertions.assertEquals(n, new Vector(0, 0.97014, -0.24254));
+    }
 }
