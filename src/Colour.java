@@ -2,7 +2,7 @@ public class Colour {
     double red;
     double green;
     double blue;
-    public Colour() // Default colour is black.
+    public Colour() // Default colour is black. // Values of r, g, and b should be between 0 and 1.
     {
         red = 0;
         green = 0;
