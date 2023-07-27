@@ -183,4 +183,24 @@ public class TupleTest {
                 () -> Assertions.assertEquals(vTwo.cross(vOne), vResultTwo)
         );
     }
+
+    @Test
+    @DisplayName("Reflecting a vector approaching at 45 deg or pi/4 rad")
+    public void piOnFourReflection()
+    {
+        Vector v = new Vector(1, -1, 0);
+        Vector n = new Vector(0, 1, 0);
+        Vector r = v.reflect(n);
+        Assertions.assertEquals(r, new Vector(1, 1, 0));
+    }
+
+    @Test
+    @DisplayName("Reflecting a vector at a different angle")
+    public void otherReflection()
+    {
+        Vector v = new Vector(0, -1, 0);
+        Vector n = new Vector(Math.sqrt(2)/2, Math.sqrt(2)/2, 0);
+        Vector r = v.reflect(n);
+        Assertions.assertEquals(r, new Vector(1, 0, 0));
+    }
 }
