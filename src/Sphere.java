@@ -45,4 +45,18 @@ public class Sphere {
     {
         transform = m;
     }
+
+    public Vector normalAt(Point worldPoint)
+    {
+        // We are going to change the worldPoint to an object-relative point objectPoint, find the normal at the
+        // object point, then transform the normal to the world-relative normal to be returned.
+        // Note that the w value of the normal after being multiplied by the inverse transpose has to be manually set
+        // to zero due to any translation in the sphere's transformation altering the w value unnecessarily.
+        //
+        Point objectPoint = new Point(transform.inverse().times(worldPoint));
+        Vector objectNormal = new Vector(objectPoint.minus(new Point(0, 0, 0)));
+        Tuple worldNormal = transform.inverse().transposed().times(objectNormal);
+        worldNormal.w = 0;
+        return new Vector(worldNormal).normalised();
+    }
 }
