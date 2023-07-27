@@ -51,4 +51,10 @@ public class Vector extends Tuple {
                 x * v.y - y * v.x
         );
     }
+
+    public Vector reflect(Vector normal)
+    {
+        // Reflects this object's vector against a point on an object with the passed normal.
+        return new Vector(this.minus(normal.scalarMultiply(2 * this.dot(normal))));
+    }
 }
