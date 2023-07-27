@@ -59,7 +59,7 @@ public class Material {
             }
             else
             {
-                specularComponent = effectiveColour.scalarMultiply(specular).scalarMultiply(Math.pow(reflectionDotEye, shininess));
+                specularComponent = light.intensity.scalarMultiply(specular).scalarMultiply(Math.pow(reflectionDotEye, shininess));
             }
         }
         return ambientComponent.plus(diffuseComponent).plus(specularComponent);
