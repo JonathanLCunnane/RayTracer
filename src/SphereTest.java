@@ -52,7 +52,7 @@ public class SphereTest {
     public void defaultTransform()
     {
         Sphere s = new Sphere();
-        Assertions.assertEquals(s.transform, new IdentityMatrix(4));
+        Assertions.assertEquals(s.getTransform(), new IdentityMatrix(4));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class SphereTest {
         Sphere s = new Sphere();
         Matrix m = new TranslationMatrix(2, 3, 4);
         s.setTransform(m);
-        Assertions.assertEquals(s.transform, m);
+        Assertions.assertEquals(s.getTransform(), m);
     }
 
     @Test
@@ -166,7 +166,7 @@ public class SphereTest {
     public void defaultMaterial()
     {
         Sphere s = new Sphere();
-        Assertions.assertEquals(s.material, new Material());
+        Assertions.assertEquals(s.getMaterial(), new Material());
     }
 
     @Test
@@ -176,7 +176,7 @@ public class SphereTest {
         Sphere s = new Sphere();
         Material m = new Material();
         m.ambient = 1;
-        s.material = m;
-        Assertions.assertEquals(s.material, m);
+        s.setMaterial(m);
+        Assertions.assertEquals(s.getMaterial(), m);
     }
 }

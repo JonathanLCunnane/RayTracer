@@ -1,8 +1,8 @@
-public class Sphere {
+public class Sphere implements RayTracerObject {
     public Point c;
     public double r;
-    public Matrix transform;
-    public Material material;
+    private Matrix transform;
+    private Material material;
     public Sphere()
     {
         c = new Point(0, 0,0);
@@ -46,6 +46,21 @@ public class Sphere {
     public void setTransform(Matrix m)
     {
         transform = m;
+    }
+
+    public Matrix getTransform()
+    {
+        return transform;
+    }
+
+    public void setMaterial(Material mat)
+    {
+        material = mat;
+    }
+
+    public Material getMaterial()
+    {
+        return material;
     }
 
     public Vector normalAt(Point worldPoint)

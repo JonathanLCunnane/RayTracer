@@ -1,7 +1,7 @@
 public class Intersection {
-    public Object object;
+    public RayTracerObject object;
     public double time;
-    public Intersection(Object obj, double t)
+    public Intersection(RayTracerObject obj, double t)
     {
         object = obj;
         time = t;
@@ -12,7 +12,7 @@ public class Intersection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Intersection i = (Intersection) o;
-        if (i.object != object) return false;
+        if (!i.object.equals(object)) return false;
         return i.time == time;
     }
 }
