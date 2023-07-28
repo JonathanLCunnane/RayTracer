@@ -10,6 +10,8 @@ import Tuples.Point;
 import Tuples.Tuple;
 import Tuples.Vector;
 
+import java.util.Objects;
+
 public class Sphere implements RayTracerObject {
     public Point c;
     public double r;
@@ -28,8 +30,10 @@ public class Sphere implements RayTracerObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sphere s = (Sphere) o;
-        if (s.c != c) return false;
-        return s.r == r;
+        if (s.r != r) return false;
+        if (!Objects.equals(s.material, material)) return false;
+        if (!Objects.equals(s.transform, transform)) return false;
+        return Objects.equals(s.c, c);
     }
 
     public Intersections intersections(Ray ray)
