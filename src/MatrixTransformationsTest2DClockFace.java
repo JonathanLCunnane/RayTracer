@@ -1,3 +1,10 @@
+import Display.Canvas;
+import Display.Colour;
+import Matrices.Matrix;
+import Matrices.ZRotationMatrix;
+import Tuples.Point;
+import Tuples.Tuple;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,9 +20,9 @@ public class MatrixTransformationsTest2DClockFace {
         Matrix twelfth = new ZRotationMatrix(Math.PI/6);
         for (int i = 0; i < 12; i++)
         {
-            // Draw Point p on canvas.
+            // Draw Tuples.Point p on canvas.
             c.writeToCanvas(WHITE, (int) Math.round(p.x) + 25, (int) Math.round(p.y) + 25);
-            // Rotate Point p.
+            // Rotate Tuples.Point p.
             p = twelfth.times(p);
         }
         String out = c.toPlainPPM();

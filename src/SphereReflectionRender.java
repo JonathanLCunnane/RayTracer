@@ -1,3 +1,12 @@
+import Display.Canvas;
+import Display.Colour;
+import RayTracing.Intersections;
+import RayTracing.PointLight;
+import RayTracing.Ray;
+import RayTracing.Objects.Sphere;
+import Tuples.Point;
+import Tuples.Vector;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
