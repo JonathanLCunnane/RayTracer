@@ -25,7 +25,8 @@ public class Matrix {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        if (getClass() != o.getClass() && !getClass().getGenericSuperclass().equals(o.getClass()) && !o.getClass().getGenericSuperclass().equals(getClass())) return false;
         Matrix m = (Matrix) o;
         if (rows != m.rows || columns != m.columns) return false;
         for (int r = 0; r < rows; r++)
