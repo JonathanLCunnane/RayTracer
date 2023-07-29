@@ -1,12 +1,9 @@
-package RayTracing.Objects;
+package RayTracing;
 
 import Display.Colour;
 import Matrices.Matrix;
 import Matrices.ScalingMatrix;
-import RayTracing.DefaultWorld;
-import RayTracing.Material;
-import RayTracing.PointLight;
-import RayTracing.World;
+import RayTracing.Objects.Sphere;
 import Tuples.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
