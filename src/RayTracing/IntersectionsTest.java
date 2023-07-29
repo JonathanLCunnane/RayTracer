@@ -2,6 +2,8 @@ package RayTracing;
 
 import RayTracing.Objects.Sphere;
 
+import Tuples.Point;
+import Tuples.Vector;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,5 +81,24 @@ public class IntersectionsTest {
         );
         Intersection i = xs.hit();
         Assertions.assertEquals(i, iFour);
+    }
+
+    @Test
+    @DisplayName("The intersect function for World objects")
+    public void intersectWorld()
+    {
+        World w = new DefaultWorld();
+        Ray r = new Ray(
+                new Point(0, 0, -5),
+                new Vector(0, 0, 1)
+        );
+        Intersections xs = w.intersections(r);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(xs.size, 4),
+                () -> Assertions.assertEquals(xs.intersections[0].time, 4),
+                () -> Assertions.assertEquals(xs.intersections[1].time, 4.5),
+                () -> Assertions.assertEquals(xs.intersections[2].time, 5.5),
+                () -> Assertions.assertEquals(xs.intersections[3].time, 6)
+        );
     }
 }
