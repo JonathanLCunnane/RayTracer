@@ -428,4 +428,56 @@ public class MatrixTest {
                 () -> Assertions.assertEquals(zPropToY.times(p), pZY)
         );
     }
+
+    @Test
+    @DisplayName("The transformation matrix for the default orientation is the identity matrix")
+    public void defaultOrientation()
+    {
+        Point from = new Point(0, 0, 0);
+        Point to = new Point(0, 0, -1);
+        Vector up = new Vector(0, 1, 0);
+        Matrix m = new OrientationMatrix(from, to, up).viewTransform();
+        Assertions.assertEquals(m, new IdentityMatrix(4));
+    }
+
+    @Test
+    @DisplayName("The view transformation matrix for opposite of default orientation, looking in positive z")
+    public void positiveZOrientation()
+    {
+        Point from = new Point(0, 0, 0);
+        Point to = new Point(0, 0, 1);
+        Vector up = new Vector(0, 1, 0);
+        Matrix m = new OrientationMatrix(from, to, up).viewTransform();
+        Assertions.assertEquals(m, new ScalingMatrix(-1, 1, -1));
+    }
+
+    @Test
+    @DisplayName("The view transformation moves the world correctly")
+    public void orientationTranslation()
+    {
+        Point from = new Point(0, 0, 8);
+        Point to = new Point(0, 0, 0);
+        Vector up = new Vector(0, 1, 0);
+        Matrix m = new OrientationMatrix(from, to, up).viewTransform();
+        Assertions.assertEquals(m, new TranslationMatrix(0, 0, -8));
+    }
+
+    @Test
+    @DisplayName("An arbitrary view transform")
+    public void arbitraryOrientation()
+    {
+        Point from = new Point(1, 3, 2);
+        Point to = new Point(4, -2, 8);
+        Vector up = new Vector(1, 1, 0);
+        Matrix m = new OrientationMatrix(from, to, up).viewTransform();
+        Assertions.assertEquals(m, new Matrix(4, 4,
+                new double[]
+                        {
+                               -0.50709,  0.50709,  0.67612, -2.36643,
+                                0.76772,  0.60609,  0.12122, -2.82843,
+                               -0.35857,  0.59761, -0.71714,  0.00000,
+                                0.00000,  0.00000,  0.00000,  1.00000
+                        }
+        ));
+    }
 }
