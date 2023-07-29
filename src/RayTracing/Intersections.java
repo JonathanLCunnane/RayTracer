@@ -1,6 +1,7 @@
 package RayTracing;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Intersections {
     public Intersection[] intersections;
@@ -39,5 +40,14 @@ public class Intersections {
             if (i.time >= 0) return i;
         }
         return null;
+    }
+
+    public Intersections combine(Intersections xs)
+    {
+        Intersection[] newXSArr = Stream.concat(
+                Arrays.stream(intersections),
+                Arrays.stream(xs.intersections)
+        ).toArray(Intersection[]::new);
+        return new Intersections(newXSArr);
     }
 }
