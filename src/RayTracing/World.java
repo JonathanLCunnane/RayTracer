@@ -28,4 +28,14 @@ public class World {
         }
         return false;
     }
+
+    public Intersections intersections(Ray r)
+    {
+        Intersections xs = new Intersections(new Intersection[] {});
+        for (RayTracerObject object : objects)
+        {
+            xs = xs.combine(object.intersections(r));
+        }
+        return xs;
+    }
 }
