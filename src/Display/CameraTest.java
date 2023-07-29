@@ -2,6 +2,8 @@ package Display;
 
 import Matrices.IdentityMatrix;
 import Matrices.OrientationMatrix;
+import Matrices.TranslationMatrix;
+import Matrices.YRotationMatrix;
 import RayTracing.DefaultWorld;
 import RayTracing.Ray;
 import RayTracing.World;
@@ -62,6 +64,19 @@ public class CameraTest {
         Assertions.assertAll(
                 () -> Assertions.assertEquals(r.origin, new Point(0, 0, 0)),
                 () -> Assertions.assertEquals(r.direction, new Vector(0.66519, 0.33259, -0.66851))
+        );
+    }
+
+    @Test
+    @DisplayName("Ray when the camera is transformed")
+    public void cameraTransformRay()
+    {
+        Camera c = new Camera(201, 101, Math.PI/2);
+        c.transform = new YRotationMatrix(Math.PI/4).times(new TranslationMatrix(0, -2, 5));
+        Ray r = c.rayForPixel(100, 50);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(r.origin, new Point(0, 2, -5)),
+                () -> Assertions.assertEquals(r.direction, new Vector(Math.sqrt(2)/2, 0, -Math.sqrt(2)/2))
         );
     }
 
