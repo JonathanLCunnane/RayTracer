@@ -33,7 +33,7 @@ public class Matrix {
         {
             for (int c = 0; c < columns; c++)
             {
-                if ((matrix[r][c] - m.matrix[r][c]) > 0.00001) return false;
+                if ((matrix[r][c] - m.matrix[r][c]) > 0.00001 || (m.matrix[r][c] - matrix[r][c]) > 0.00001) return false;
             }
         }
         return true;
