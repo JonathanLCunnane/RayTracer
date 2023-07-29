@@ -56,9 +56,9 @@ public class Canvas {
                         """,
                         width, height);
         StringBuilder out = new StringBuilder(header);
-        for (int x = 0; x < width; x++)
+        for (int y = 0; y < height; y++)
         {
-            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
             {
                 out.append(String.format("%d %d %d", lerp(canvas[x][y].red), lerp(canvas[x][y].green), lerp(canvas[x][y].blue)));
                 out.append("\n");
