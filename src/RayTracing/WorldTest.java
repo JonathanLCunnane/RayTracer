@@ -3,6 +3,7 @@ package RayTracing;
 import Display.Colour;
 import Matrices.Matrix;
 import Matrices.ScalingMatrix;
+import RayTracing.Objects.RayTracerObject;
 import RayTracing.Objects.Sphere;
 import Tuples.Point;
 import Tuples.Vector;
@@ -107,5 +108,22 @@ public class WorldTest {
         );
         Colour c = w.colourAt(r);
         Assertions.assertEquals(c, new Colour(0.38066, 0.47583, 0.2855));
+    }
+
+    @Test
+    @DisplayName("The colour with an intersection behind the ray")
+    public void behindRayHit()
+    {
+        World w = new DefaultWorld();
+        RayTracerObject outer = w.objects[0];
+        outer.getMaterial().ambient = 1;
+        RayTracerObject inner = w.objects[1];
+        inner.getMaterial().ambient = 1;
+        Ray r = new Ray(
+                new Point(0, 0, 0.75),
+                new Vector(0, 0, -1)
+        );
+        Colour c = w.colourAt(r);
+        Assertions.assertEquals(c, inner.getMaterial().colour);
     }
 }
