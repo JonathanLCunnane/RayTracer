@@ -3,6 +3,7 @@ package RayTracing;
 import Display.Colour;
 import Matrices.Matrix;
 import Matrices.ScalingMatrix;
+import Matrices.TranslationMatrix;
 import RayTracing.Objects.RayTracerObject;
 import RayTracing.Objects.Sphere;
 import Tuples.Point;
@@ -125,5 +126,66 @@ public class WorldTest {
         );
         Colour c = w.colourAt(r);
         Assertions.assertEquals(c, inner.getMaterial().colour);
+    }
+
+    @Test
+    @DisplayName("There is no shadow when nothing is co-linear with the point and light")
+    public void noShadow()
+    {
+        World w = new DefaultWorld();
+        Point p = new Point(0, 10, 0);
+        Assertions.assertFalse(w.isInShadow(p));
+    }
+
+    @Test
+    @DisplayName("There is a shadow when an object is in between the light and the point")
+    public void shadow()
+    {
+        World w = new DefaultWorld();
+        Point p = new Point(10, -10, 10);
+        Assertions.assertTrue(w.isInShadow(p));
+    }
+
+    @Test
+    @DisplayName("There is no shadow when the light source is in between the point and an object")
+    public void noShadowCoLinear()
+    {
+        World w = new DefaultWorld();
+        Point p = new Point(-20, 20, -20);
+        Assertions.assertFalse(w.isInShadow(p));
+    }
+
+    @Test
+    @DisplayName("There is no shadow when the object is behind the point")
+    public void noShadowCoLinearTwo()
+    {
+        World w = new DefaultWorld();
+        Point p = new Point(-2, 2, -2);
+        Assertions.assertFalse(w.isInShadow(p));
+    }
+
+    @Test
+    @DisplayName("The shadeHit() method works given an intersection in shadow")
+    public void shadeHitInShadow()
+    {
+        World w = new World();
+        w.light = new PointLight(
+                new Point(0, 0, -10),
+                new Colour(1, 1, 1)
+        );
+        Sphere second = new Sphere();
+        second.setTransform(new TranslationMatrix(0, 0, 10));
+        w.objects = new RayTracerObject[]
+                {
+                        new Sphere(),
+                        second
+                };
+        Ray r = new Ray(
+                new Point(0, 0, 5),
+                new Vector(0, 0, 1)
+        );
+        Computations comps = w.intersections(r).hit().prepareComputations(r);
+        Colour c = w.shadeHit(comps);
+        Assertions.assertEquals(c, new Colour(0.1, 0.1, 0.1));
     }
 }
