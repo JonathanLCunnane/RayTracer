@@ -1,31 +1,31 @@
 package RayTracing;
 
 import Display.Colour;
-import RayTracing.Objects.RayTracerObject;
+import RayTracing.Objects.ParentObject;
 import Tuples.Point;
 import Tuples.Vector;
 
 import java.util.Objects;
 
 public class World {
-    public RayTracerObject[] objects;
+    public ParentObject[] objects;
     public PointLight light;
 
     public World()
     {
-        objects = new RayTracerObject[] {};
+        objects = new ParentObject[] {};
         light = null;
     }
 
-    public World(RayTracerObject[] objs, PointLight lightSource)
+    public World(ParentObject[] objs, PointLight lightSource)
     {
         objects = objs;
         light = lightSource;
     }
 
-    public boolean contains(RayTracerObject object)
+    public boolean contains(ParentObject object)
     {
-        for (RayTracerObject possibleObject : objects)
+        for (ParentObject possibleObject : objects)
         {
             if (Objects.equals(possibleObject, object)) return true;
         }
@@ -35,7 +35,7 @@ public class World {
     public Intersections intersections(Ray r)
     {
         Intersections xs = new Intersections(new Intersection[] {});
-        for (RayTracerObject object : objects)
+        for (ParentObject object : objects)
         {
             xs = xs.combine(object.intersections(r));
         }
@@ -45,7 +45,7 @@ public class World {
     public Colour shadeHit(Computations c)
     {
         boolean inShadow = isInShadow(c.overPoint);
-        return c.object.getMaterial().lightningAtPoint(
+        return c.object.material.lightningAtPoint(
                 light,
                 c.point,
                 c.eyeV,

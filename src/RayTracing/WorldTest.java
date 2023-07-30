@@ -1,10 +1,9 @@
 package RayTracing;
 
 import Display.Colour;
-import Matrices.Matrix;
 import Matrices.ScalingMatrix;
 import Matrices.TranslationMatrix;
-import RayTracing.Objects.RayTracerObject;
+import RayTracing.Objects.ParentObject;
 import RayTracing.Objects.Sphere;
 import Tuples.Point;
 import Tuples.Vector;
@@ -38,11 +37,10 @@ public class WorldTest {
         sOneM.colour = new Colour(0.8, 1.0, 0.6);
         sOneM.diffuse = 0.7;
         sOneM.specular = 0.2;
-        sOne.setMaterial(sOneM);
+        sOne.material = sOneM;
 
         Sphere sTwo = new Sphere();
-        Matrix sTwoT = new ScalingMatrix(0.5, 0.5, 0.5);
-        sTwo.setTransform(sTwoT);
+        sTwo.transform = new ScalingMatrix(0.5, 0.5, 0.5);
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(w.light, light),
@@ -116,16 +114,16 @@ public class WorldTest {
     public void behindRayHit()
     {
         World w = new DefaultWorld();
-        RayTracerObject outer = w.objects[0];
-        outer.getMaterial().ambient = 1;
-        RayTracerObject inner = w.objects[1];
-        inner.getMaterial().ambient = 1;
+        ParentObject outer = w.objects[0];
+        outer.material.ambient = 1;
+        ParentObject inner = w.objects[1];
+        inner.material.ambient = 1;
         Ray r = new Ray(
                 new Point(0, 0, 0.75),
                 new Vector(0, 0, -1)
         );
         Colour c = w.colourAt(r);
-        Assertions.assertEquals(c, inner.getMaterial().colour);
+        Assertions.assertEquals(c, inner.material.colour);
     }
 
     @Test
@@ -174,8 +172,8 @@ public class WorldTest {
                 new Colour(1, 1, 1)
         );
         Sphere second = new Sphere();
-        second.setTransform(new TranslationMatrix(0, 0, 10));
-        w.objects = new RayTracerObject[]
+        second.transform = new TranslationMatrix(0, 0, 10);
+        w.objects = new ParentObject[]
                 {
                         new Sphere(),
                         second

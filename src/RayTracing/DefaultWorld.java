@@ -2,7 +2,7 @@ package RayTracing;
 
 import Display.Colour;
 import Matrices.ScalingMatrix;
-import RayTracing.Objects.RayTracerObject;
+import RayTracing.Objects.ParentObject;
 import RayTracing.Objects.Sphere;
 import Tuples.Point;
 
@@ -11,7 +11,7 @@ public class DefaultWorld extends World {
     public DefaultWorld()
     {
         super(
-                new RayTracerObject[] {
+                new ParentObject[] {
                         new Sphere(),
                         new Sphere()
                 },
@@ -25,17 +25,14 @@ public class DefaultWorld extends World {
 
     private void setDefaultWorldObjectParameters()
     {
-        objects[0].setMaterial(
-                new Material(
-                        new Colour(0.8, 1, 0.6),
-                        0.1,
-                        0.7,
-                        0.2,
-                        200
-                )
+        objects[0].material = new Material(
+                new Colour(0.8, 1, 0.6),
+                0.1,
+                0.7,
+                0.2,
+                200
         );
-        objects[1].setTransform(
-                new ScalingMatrix(0.5, 0.5, 0.5)
-        );
+
+        objects[1].transform = new ScalingMatrix(0.5, 0.5, 0.5);
     }
 }

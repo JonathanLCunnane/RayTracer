@@ -61,7 +61,7 @@ public class SphereTest {
     public void defaultTransform()
     {
         Sphere s = new Sphere();
-        Assertions.assertEquals(s.getTransform(), new IdentityMatrix(4));
+        Assertions.assertEquals(s.transform, new IdentityMatrix(4));
     }
 
     @Test
@@ -70,8 +70,8 @@ public class SphereTest {
     {
         Sphere s = new Sphere();
         Matrix m = new TranslationMatrix(2, 3, 4);
-        s.setTransform(m);
-        Assertions.assertEquals(s.getTransform(), m);
+        s.transform = m;
+        Assertions.assertEquals(s.transform, m);
     }
 
     @Test
@@ -83,9 +83,7 @@ public class SphereTest {
                 new Point(0, 0, -5),
                 new Vector(0, 0, 1)
         );
-        s.setTransform(
-                new ScalingMatrix(2, 2, 2)
-        );
+        s.transform = new ScalingMatrix(2, 2, 2);
         Intersections xs = s.intersections(r);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(xs.size, 2),
@@ -103,9 +101,7 @@ public class SphereTest {
                 new Point(0, 0, -5),
                 new Vector(0, 0, 1)
         );
-        s.setTransform(
-                new TranslationMatrix(5, 0, 0)
-        );
+        s.transform = new TranslationMatrix(5, 0, 0);
         Intersections xs = s.intersections(r);
         Assertions.assertEquals(xs.size, 0);
     }
@@ -154,7 +150,7 @@ public class SphereTest {
     public void translatedSphereNormal()
     {
         Sphere s = new Sphere();
-        s.setTransform(new TranslationMatrix(0, 1, 0));
+        s.transform = new TranslationMatrix(0, 1, 0);
         Vector n = s.normalAt(new Point(0, 1.70711, -0.70711));
         Assertions.assertEquals(n, new Vector(0, 0.70711, -0.70711));
     }
@@ -164,8 +160,7 @@ public class SphereTest {
     public void transformedSphereNormal()
     {
         Sphere s = new Sphere();
-        Matrix transform = new ScalingMatrix(1, 0.5, 1).times(new ZRotationMatrix(Math.PI/5));
-        s.setTransform(transform);
+        s.transform = new ScalingMatrix(1, 0.5, 1).times(new ZRotationMatrix(Math.PI/5));
         Vector n = s.normalAt(new Point(0, Math.sqrt(2)/2, -Math.sqrt(2)/2));
         Assertions.assertEquals(n, new Vector(0, 0.97014, -0.24254));
     }
@@ -175,7 +170,7 @@ public class SphereTest {
     public void defaultMaterial()
     {
         Sphere s = new Sphere();
-        Assertions.assertEquals(s.getMaterial(), new Material());
+        Assertions.assertEquals(s.material, new Material());
     }
 
     @Test
@@ -185,7 +180,7 @@ public class SphereTest {
         Sphere s = new Sphere();
         Material m = new Material();
         m.ambient = 1;
-        s.setMaterial(m);
-        Assertions.assertEquals(s.getMaterial(), m);
+        s.material = m;
+        Assertions.assertEquals(s.material, m);
     }
 }

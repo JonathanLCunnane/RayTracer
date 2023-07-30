@@ -1,6 +1,5 @@
 import Display.Canvas;
 import Display.Colour;
-import Matrices.Matrix;
 import Matrices.ShearingMatrix;
 import RayTracing.Intersections;
 import RayTracing.Ray;
@@ -17,8 +16,7 @@ import java.nio.file.Paths;
 public class SphereSilhouette {
     public static void main(String[] args) throws IOException {
         Sphere s = new Sphere();
-        Matrix m = new ShearingMatrix(0.5, 0.7, 0.1, 0.3, 1.1, 1);
-        s.setTransform(m);
+        s.transform = new ShearingMatrix(0.5, 0.7, 0.1, 0.3, 1.1, 1);
         Point rayOrigin = new Point(0, 0, -5);
         double wallZ = 10;
         double wallSize = 20;

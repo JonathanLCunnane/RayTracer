@@ -17,7 +17,7 @@ public class SphereReflectionRender {
     public static void main(String[] args) throws IOException
     {
         Sphere s = new Sphere();
-        s.getMaterial().colour = new Colour(1, 0.2, 1);
+        s.material.colour = new Colour(1, 0.2, 1);
         PointLight light = new PointLight(
                 new Point(-10, 10, -10),
                 new Colour(1, 1,1)
@@ -44,7 +44,7 @@ public class SphereReflectionRender {
                 if (xs.hit() != null)
                 {
                     Point point = new Point(r.position(xs.hit().time));
-                    Colour colour = xs.hit().object.getMaterial().lightningAtPoint(
+                    Colour colour = xs.hit().object.material.lightningAtPoint(
                             light,
                             point,
                             r.direction.normalised().scalarMultiply(-1),

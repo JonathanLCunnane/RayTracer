@@ -1,18 +1,18 @@
 package RayTracing;
 
-import RayTracing.Objects.RayTracerObject;
+import RayTracing.Objects.ParentObject;
 import Tuples.Point;
 import Tuples.Vector;
 
 public class Computations {
     public double time;
-    public RayTracerObject object;
+    public ParentObject object;
     public Point point;
     public Point overPoint; // This point is just above the surface with point, and is used to for shadowing purposes.
     public Vector eyeV;
     public Vector normalV;
     public boolean inside; // Whether the ray meets the surface inside the object or not.
-    public Computations(double t, RayTracerObject obj, Point p, Vector eV, Vector nV)
+    public Computations(double t, ParentObject obj, Point p, Vector eV, Vector nV)
     {
         time = t;
         object = obj;

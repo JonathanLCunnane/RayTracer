@@ -1,15 +1,15 @@
 package RayTracing;
 
-import RayTracing.Objects.RayTracerObject;
+import RayTracing.Objects.ParentObject;
 import Tuples.Point;
 import Tuples.Vector;
 
 import java.util.Objects;
 
 public class Intersection {
-    public RayTracerObject object;
+    public ParentObject object;
     public double time;
-    public Intersection(RayTracerObject obj, double t)
+    public Intersection(ParentObject obj, double t)
     {
         object = obj;
         time = t;

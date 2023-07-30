@@ -1,22 +1,18 @@
 package RayTracing.Objects;
 
 import Matrices.IdentityMatrix;
-import Matrices.Matrix;
 import RayTracing.Intersection;
 import RayTracing.Intersections;
 import RayTracing.Material;
 import RayTracing.Ray;
 import Tuples.Point;
-import Tuples.Tuple;
 import Tuples.Vector;
 
 import java.util.Objects;
 
-public class Sphere implements RayTracerObject {
+public class Sphere extends ParentObject {
     public Point c;
     public double r;
-    private Matrix transform;
-    private Material material;
     public Sphere()
     {
         c = new Point(0, 0,0);
@@ -36,10 +32,8 @@ public class Sphere implements RayTracerObject {
         return Objects.equals(s.c, c);
     }
 
-    public Intersections intersections(Ray ray)
+    public Intersections localIntersections(Ray ray)
     {
-        ray = ray.transform(transform.inverse()); // We will transform the ray with the inverse transformation of the
-                                                  // sphere, instead of transforming the sphere, as this is easier.
         // From https://en.wikipedia.org/wiki/Line–sphere_intersection
         Point o = ray.origin;
         Vector u = ray.direction;
@@ -59,37 +53,10 @@ public class Sphere implements RayTracerObject {
         return new Intersections(xs);
     }
 
-    public void setTransform(Matrix m)
-    {
-        transform = m;
-    }
 
-    public Matrix getTransform()
-    {
-        return transform;
-    }
 
-    public void setMaterial(Material mat)
+    public Vector localNormalAt(Point localPoint)
     {
-        material = mat;
-    }
-
-    public Material getMaterial()
-    {
-        return material;
-    }
-
-    public Vector normalAt(Point worldPoint)
-    {
-        // We are going to change the worldPoint to an object-relative point objectPoint, find the normal at the
-        // object point, then transform the normal to the world-relative normal to be returned.
-        // Note that the w value of the normal after being multiplied by the inverse transpose has to be manually set
-        // to zero due to any translation in the sphere's transformation altering the w value unnecessarily.
-        //
-        Point objectPoint = new Point(transform.inverse().times(worldPoint));
-        Vector objectNormal = new Vector(objectPoint.minus(new Point(0, 0, 0)));
-        Tuple worldNormal = transform.inverse().transposed().times(objectNormal);
-        worldNormal.w = 0;
-        return new Vector(worldNormal).normalised();
+        return new Vector(localPoint.minus(new Point(0, 0, 0)));
     }
 }
