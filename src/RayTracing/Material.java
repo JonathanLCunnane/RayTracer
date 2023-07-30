@@ -39,11 +39,17 @@ public class Material {
         shininess = sH;
     }
 
-    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV) // The vectors normalV and eyeV are pointing away from 'point', and are normalised.
+    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV)
+    {
+        return lightningAtPoint(light, point, eyeV, normalV, false);
+    }
+
+    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV, boolean isInShadow) // The vectors normalV and eyeV are pointing away from 'point', and are normalised.
     {
         Colour effectiveColour = colour.times(light.intensity);
         Vector lightV = new Vector(light.position.minus(point)).normalised();
         Colour ambientComponent = effectiveColour.scalarMultiply(ambient);
+        if (isInShadow) return ambientComponent;
         Colour diffuseComponent;
         Colour specularComponent;
         double lightDotNormal = lightV.dot(normalV); // If this is negative, the light is behind the object, so the diffuse and specular components are zero.
