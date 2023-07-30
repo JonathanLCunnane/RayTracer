@@ -86,4 +86,21 @@ public class MaterialTest {
         Colour result = m.lightningAtPoint(light, point, eyeV, normalV);
         Assertions.assertEquals(result, new Colour(1.6364, 1.6364, 1.6364));
     }
+
+    @Test
+    @DisplayName("Lighting with the surface in shadow")
+    public void surfaceInShadow()
+    {
+        Material m = new Material();
+        Point point = new Point(0, 0, 0);
+        Vector eyeV = new Vector(0, 0, -1);
+        Vector normalV = new Vector(0, 0, -1);
+        PointLight light = new PointLight(
+                new Point(0, 0, -10),
+                new Colour(1, 1, 1)
+        );
+        boolean inShadow = true;
+        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, inShadow);
+        Assertions.assertEquals(result, new Colour(0.1, 0.1, 0.1));
+    }
 }
