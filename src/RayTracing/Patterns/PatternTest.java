@@ -133,7 +133,7 @@ public class PatternTest {
     }
 
     @Test
-    @DisplayName("A gradient linearly interpolates between colours")
+    @DisplayName("A gradient linearly interpolates between colours in x")
     public void gradientPattern()
     {
         ParentPattern p = new GradientPattern(new Colour(1, 1, 1), new Colour(0, 0, 0));
@@ -142,6 +142,19 @@ public class PatternTest {
                 () -> Assertions.assertEquals(p.localColourAt(new Point(0.25, 0, 0)), new Colour(0.75, 0.75, 0.75)),
                 () -> Assertions.assertEquals(p.localColourAt(new Point(0.5, 0, 0)), new Colour(0.5, 0.5, 0.5)),
                 () -> Assertions.assertEquals(p.localColourAt(new Point(0.75, 0, 0)), new Colour(0.25, 0.25, 0.25))
+        );
+    }
+
+    @Test
+    @DisplayName("A ring should extend in both x and z")
+    public void ringPattern()
+    {
+        ParentPattern p = new RingPattern(new Colour(1, 1, 1), new Colour(0, 0, 0));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(1, 0, 0)), new Colour(0, 0, 0)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 1)), new Colour(0, 0, 0)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0.708, 0, 0.708)), new Colour(0, 0, 0))
         );
     }
 }
