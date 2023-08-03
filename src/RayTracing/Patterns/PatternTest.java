@@ -131,4 +131,17 @@ public class PatternTest {
         Colour c = p.colourAt(s, new Point(2.5, 0, 0));
         Assertions.assertEquals(c, new Colour(1, 1, 1));
     }
+
+    @Test
+    @DisplayName("A gradient linearly interpolates between colours")
+    public void gradientPattern()
+    {
+        ParentPattern p = new GradientPattern(new Colour(1, 1, 1), new Colour(0, 0, 0));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0.25, 0, 0)), new Colour(0.75, 0.75, 0.75)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0.5, 0, 0)), new Colour(0.5, 0.5, 0.5)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0.75, 0, 0)), new Colour(0.25, 0.25, 0.25))
+        );
+    }
 }
