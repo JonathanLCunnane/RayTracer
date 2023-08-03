@@ -48,7 +48,8 @@ public class SphereReflectionRender {
                             light,
                             point,
                             r.direction.normalised().scalarMultiply(-1),
-                            xs.hit().object.normalAt(point)
+                            xs.hit().object.normalAt(point),
+                            xs.hit().object
                     );
                     c.writeToCanvas(colour, canvasX, canvasY);
                 }

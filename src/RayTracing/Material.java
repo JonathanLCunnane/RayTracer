@@ -1,6 +1,8 @@
 package RayTracing;
 
 import Display.Colour;
+import RayTracing.Objects.ParentObject;
+import RayTracing.Patterns.ParentPattern;
 import Tuples.Point;
 import Tuples.Vector;
 
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class Material {
     // Materials will be based off the Phong reflection model.
     public Colour colour;
+    public ParentPattern pattern;
     public double ambient; // The light reflected from other objects in the environment. Between 0 and 1.
     public double diffuse; // The light reflected from a matte surface. Between 0 and 1.
     public double specular; // The reflection of the light source itself. Between 0 and 1.
@@ -16,6 +19,7 @@ public class Material {
     public Material()
     {
         colour = new Colour(1, 1, 1);
+        pattern = null;
         ambient = 0.1;
         diffuse = 0.9;
         specular = 0.9;
@@ -39,14 +43,19 @@ public class Material {
         shininess = sH;
     }
 
-    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV)
+    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV, ParentObject object)
     {
-        return lightningAtPoint(light, point, eyeV, normalV, false);
+        return lightningAtPoint(light, point, eyeV, normalV, false, object);
     }
 
-    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV, boolean isInShadow) // The vectors normalV and eyeV are pointing away from 'point', and are normalised.
+    public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV, boolean isInShadow, ParentObject object)
+    // The vectors normalV and eyeV are pointing away from 'point', and are normalised.
     {
-        Colour effectiveColour = colour.times(light.intensity);
+        Colour effectiveColour;
+        if (pattern != null) effectiveColour = pattern.colourAt(object, point);
+        else effectiveColour = colour;
+        effectiveColour = effectiveColour.times(light.intensity);
+
         Vector lightV = new Vector(light.position.minus(point)).normalised();
         Colour ambientComponent = effectiveColour.scalarMultiply(ambient);
         if (isInShadow) return ambientComponent;

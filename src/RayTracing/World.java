@@ -50,7 +50,8 @@ public class World {
                 c.point,
                 c.eyeV,
                 c.normalV,
-                inShadow
+                inShadow,
+                c.object
         );
     }
 

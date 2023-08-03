@@ -35,7 +35,7 @@ public class MaterialTest {
                 new Point(0, 0, -10),
                 new Colour(1, 1, 1)
         );
-        Colour result = m.lightningAtPoint(light, point, eyeV, normalV);
+        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, null);
         Assertions.assertEquals(result, new Colour(1.9, 1.9, 1.9));
     }
 
@@ -51,7 +51,7 @@ public class MaterialTest {
                 new Point(0, 0, -10),
                 new Colour(1, 1, 1)
         );
-        Colour result = m.lightningAtPoint(light, point, eyeV, normalV);
+        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, null);
         Assertions.assertEquals(result, new Colour(1, 1, 1));
     }
 
@@ -67,7 +67,7 @@ public class MaterialTest {
                 new Point(0, 10, -10),
                 new Colour(1, 1, 1)
         );
-        Colour result = m.lightningAtPoint(light, point, eyeV, normalV);
+        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, null);
         Assertions.assertEquals(result, new Colour(0.7364, 0.7364, 0.7364));
     }
 
@@ -83,7 +83,7 @@ public class MaterialTest {
                 new Point(0, 10, -10),
                 new Colour(1, 1, 1)
         );
-        Colour result = m.lightningAtPoint(light, point, eyeV, normalV);
+        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, null);
         Assertions.assertEquals(result, new Colour(1.6364, 1.6364, 1.6364));
     }
 
@@ -100,7 +100,7 @@ public class MaterialTest {
                 new Colour(1, 1, 1)
         );
         boolean inShadow = true;
-        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, inShadow);
+        Colour result = m.lightningAtPoint(light, point, eyeV, normalV, inShadow, null);
         Assertions.assertEquals(result, new Colour(0.1, 0.1, 0.1));
     }
 }
