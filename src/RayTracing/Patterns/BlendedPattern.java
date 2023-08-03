@@ -1,6 +1,7 @@
 package RayTracing.Patterns;
 
 import Display.Colour;
+import RayTracing.Objects.ParentObject;
 import Tuples.Point;
 
 import java.util.Objects;
@@ -8,10 +9,12 @@ import java.util.Objects;
 public class BlendedPattern extends ParentPattern{
     public ParentPattern a;
     public ParentPattern b;
-    public BlendedPattern(ParentPattern patternA, ParentPattern patternB)
+    public ParentObject obj;
+    public BlendedPattern(ParentPattern patternA, ParentPattern patternB, ParentObject object)
     {
         a = patternA;
         b = patternB;
+        obj = object;
     }
 
     @Override
@@ -25,6 +28,6 @@ public class BlendedPattern extends ParentPattern{
 
     public Colour localColourAt(Point localPoint)
     {
-        return a.localColourAt(localPoint).plus(b.localColourAt(localPoint)).scalarDivide(2);
+        return a.colourAt(obj, localPoint).plus(b.colourAt(obj, localPoint)).scalarDivide(2);
     }
 }
