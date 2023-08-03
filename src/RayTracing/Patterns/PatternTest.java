@@ -157,4 +157,40 @@ public class PatternTest {
                 () -> Assertions.assertEquals(p.localColourAt(new Point(0.708, 0, 0.708)), new Colour(0, 0, 0))
         );
     }
+
+    @Test
+    @DisplayName("Checkers pattern should repeat in x")
+    public void checkersRepeatX()
+    {
+        ParentPattern p = new CheckersPattern(new Colour(1, 1, 1), new Colour(0, 0, 0));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0.99, 0, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(1.01, 0, 0)), new Colour(0, 0, 0))
+        );
+    }
+
+    @Test
+    @DisplayName("Checkers pattern should repeat in y")
+    public void checkersRepeatY()
+    {
+        ParentPattern p = new CheckersPattern(new Colour(1, 1, 1), new Colour(0, 0, 0));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0.99, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 1.01, 0)), new Colour(0, 0, 0))
+        );
+    }
+
+    @Test
+    @DisplayName("Checkers pattern should repeat in z")
+    public void checkersRepeatZ()
+    {
+        ParentPattern p = new CheckersPattern(new Colour(1, 1, 1), new Colour(0, 0, 0));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 0)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 0.99)), new Colour(1, 1, 1)),
+                () -> Assertions.assertEquals(p.localColourAt(new Point(0, 0, 1.01)), new Colour(0, 0, 0))
+        );
+    }
 }
