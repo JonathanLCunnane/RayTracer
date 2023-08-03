@@ -26,7 +26,7 @@ public class GradientPattern extends ParentPattern{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GradientPattern that = (GradientPattern) o;
-        return Objects.equals(a, that.a) && Objects.equals(b, that.b);
+        return Objects.equals(a, that.a) && Objects.equals(b, that.b) && Objects.equals(transform, that.transform);
     }
 
     public Colour localColourAt(Point localPoint)

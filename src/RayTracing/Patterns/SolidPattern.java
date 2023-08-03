@@ -17,7 +17,7 @@ public class SolidPattern extends ParentPattern {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SolidPattern that = (SolidPattern) o;
-        return Objects.equals(colour, that.colour);
+        return Objects.equals(colour, that.colour) && Objects.equals(transform, that.transform);
     }
 
     public Colour localColourAt(Point localPoint)
