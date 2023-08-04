@@ -30,7 +30,7 @@ public class ThirdWorldRender {
         // Configure the floor as a plane.
         Material wallMaterial = new Material(
                 new Colour(0.95, 0.9, 0.9),
-                0.1, 0.9, 0, 200 // The walls will be matte hence why sP = 0
+                0.1, 0.9, 0, 200, 0 // The walls will be matte hence why sP = 0
         );
         ParentPattern ringRed = new RingPattern(
                 new Colour(0.91, 0.627, 0.549),
@@ -55,14 +55,14 @@ public class ThirdWorldRender {
         left.material =
                 new Material(
                         new Colour(0.18, 0.702, 0.722),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
         Sphere middle = new Sphere();
         middle.transform = new TranslationMatrix(-0.5, 1, 0.5);
         middle.material =
                 new Material(
                         new Colour(0.8, 0.263, 0.463),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
         ParentPattern middleGradientPattern = new GradientPattern(
                 new Colour(0.812, 0.208, 0.416),
@@ -77,7 +77,7 @@ public class ThirdWorldRender {
         right.material =
                 new Material(
                         new Colour(0.141, 0.302, 0.78),
-                        0.1, 0.5, 0.2, 10
+                        0.1, 0.5, 0.2, 10, 0
                 );
         ParentPattern stripeOne = new StripePattern(
                 new Colour(0.1, 0.1, 0.1),

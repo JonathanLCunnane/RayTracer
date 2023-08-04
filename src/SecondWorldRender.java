@@ -27,7 +27,7 @@ public class SecondWorldRender {
         // Configure the floor as a plane.
         Material wallMaterial = new Material(
                 new Colour(0.95, 0.9, 0.9),
-                0.1, 0.9, 0, 200 // The walls will be matte hence why sP = 0
+                0.1, 0.9, 0, 200, 0 // The walls will be matte hence why sP = 0
         );
         Plane floor = new Plane();
         floor.transform = new ScalingMatrix(10, 0.01, 10);
@@ -41,14 +41,14 @@ public class SecondWorldRender {
         left.material =
                 new Material(
                         new Colour(0.18, 0.702, 0.722),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
         Sphere middle = new Sphere();
         middle.transform = new TranslationMatrix(-0.5, 1, 0.5);
         middle.material =
                 new Material(
                         new Colour(0.8, 0.263, 0.463),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
         Sphere right = new Sphere();
         right.transform =
@@ -57,7 +57,7 @@ public class SecondWorldRender {
         right.material =
                 new Material(
                         new Colour(0.141, 0.302, 0.78),
-                        0.1, 0.5, 0.2, 10
+                        0.1, 0.5, 0.2, 10, 0
                 );
 
         w.objects = new ParentObject[]

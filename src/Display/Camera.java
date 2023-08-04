@@ -63,7 +63,7 @@ public class Camera {
             for (int x = 0; x < hSize; x++)
             {
                 img.writeToCanvas(
-                        w.colourAt(rayForPixel(x, y)),
+                        w.colourAt(rayForPixel(x, y), 5),
                         x, y
                 );
             }

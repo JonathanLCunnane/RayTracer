@@ -30,7 +30,8 @@ public class DefaultWorld extends World {
                 0.1,
                 0.7,
                 0.2,
-                200
+                200,
+                0
         );
 
         objects[1].transform = new ScalingMatrix(0.5, 0.5, 0.5);

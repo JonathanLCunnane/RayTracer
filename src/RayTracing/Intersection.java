@@ -29,6 +29,7 @@ public class Intersection {
         Point p = new Point(r.position(time));
         Vector nV = object.normalAt(p); // Normal vector
         Vector eV = r.direction.normalised().scalarMultiply(-1); // Eye vector
-        return new Computations(time, object, p, eV, nV);
+        Vector rV = r.direction.reflect(nV);
+        return new Computations(time, object, p, eV, nV, rV);
     }
 }

@@ -25,7 +25,7 @@ public class FirstWorldRender {
         // Configure the 3 walls in the image.
         Material wallMaterial = new Material(
                 new Colour(0.95, 0.9, 0.9),
-                0.1, 0.9, 0, 200 // The walls will be matte hence why sP = 0
+                0.1, 0.9, 0, 200, 0 // The walls will be matte hence why sP = 0
         );
         Sphere floor = new Sphere();
         floor.transform = new ScalingMatrix(10, 0.01, 10);
@@ -53,14 +53,14 @@ public class FirstWorldRender {
         left.material =
                 new Material(
                         new Colour(1, 0.8, 0.1),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
         Sphere middle = new Sphere();
         middle.transform = new TranslationMatrix(-0.5, 1, 0.5);
         middle.material =
                 new Material(
                         new Colour(0.1, 1, 0.5),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
         Sphere right = new Sphere();
         right.transform =
@@ -69,7 +69,7 @@ public class FirstWorldRender {
         right.material =
                 new Material(
                         new Colour(0.8, 0.2, 0.3),
-                        0.1, 0.7, 0.3, 200
+                        0.1, 0.7, 0.3, 200, 0
                 );
 
         w.objects = new ParentObject[]
