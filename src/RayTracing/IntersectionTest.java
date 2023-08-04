@@ -1,5 +1,7 @@
 package RayTracing;
 
+import RayTracing.Objects.ParentObject;
+import RayTracing.Objects.Plane;
 import RayTracing.Objects.Sphere;
 
 import Tuples.Point;
@@ -61,5 +63,20 @@ public class IntersectionTest {
                 () -> Assertions.assertEquals(c.normalV, new Vector(0, 0, -1)),
                 () -> Assertions.assertTrue(c.inside)
         );
+    }
+
+
+    @Test
+    @DisplayName("Computations object correctly calculates the reflected vector.")
+    public void reflectedVectorCalculation()
+    {
+        ParentObject p = new Plane();
+        Ray r = new Ray(
+                new Point(0, 1, -1),
+                new Vector(0, -Math.sqrt(2)/2, Math.sqrt(2)/2)
+        );
+        Intersection i = new Intersection(p, Math.sqrt(2));
+        Computations c = i.prepareComputations(r);
+        Assertions.assertEquals(c.reflectV, new Vector(0, Math.sqrt(2)/2, Math.sqrt(2)/2));
     }
 }
