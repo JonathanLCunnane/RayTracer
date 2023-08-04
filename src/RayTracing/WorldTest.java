@@ -4,6 +4,7 @@ import Display.Colour;
 import Matrices.ScalingMatrix;
 import Matrices.TranslationMatrix;
 import RayTracing.Objects.ParentObject;
+import RayTracing.Objects.Plane;
 import RayTracing.Objects.Sphere;
 import Tuples.Point;
 import Tuples.Vector;
@@ -60,7 +61,7 @@ public class WorldTest {
         );
         Intersection i = new Intersection(w.objects[0], 4);
         Computations c = i.prepareComputations(r);
-        Colour lighting = w.shadeHit(c);
+        Colour lighting = w.shadeHit(c, 5);
         Assertions.assertEquals(lighting, new Colour(0.38066, 0.47583, 0.2855));
     }
 
@@ -79,7 +80,7 @@ public class WorldTest {
         );
         Intersection i = new Intersection(w.objects[1], 0.5);
         Computations c = i.prepareComputations(r);
-        Colour lighting = w.shadeHit(c);
+        Colour lighting = w.shadeHit(c, 5);
         Assertions.assertEquals(lighting, new Colour(0.90498, 0.90498, 0.90498));
     }
 
@@ -92,7 +93,7 @@ public class WorldTest {
                 new Point(0, 0, -5),
                 new Vector(0, 1, 0)
         );
-        Colour c = w.colourAt(r);
+        Colour c = w.colourAt(r, 5);
         Assertions.assertEquals(c, new Colour(0, 0, 0));
     }
 
@@ -105,7 +106,7 @@ public class WorldTest {
                 new Point(0, 0, -5),
                 new Vector(0, 0, 1)
         );
-        Colour c = w.colourAt(r);
+        Colour c = w.colourAt(r, 5);
         Assertions.assertEquals(c, new Colour(0.38066, 0.47583, 0.2855));
     }
 
@@ -122,7 +123,7 @@ public class WorldTest {
                 new Point(0, 0, 0.75),
                 new Vector(0, 0, -1)
         );
-        Colour c = w.colourAt(r);
+        Colour c = w.colourAt(r, 5);
         Assertions.assertEquals(c, inner.material.colour);
     }
 
@@ -183,7 +184,98 @@ public class WorldTest {
                 new Vector(0, 0, 1)
         );
         Computations comps = w.intersections(r).hit().prepareComputations(r);
-        Colour c = w.shadeHit(comps);
+        Colour c = w.shadeHit(comps, 5);
         Assertions.assertEquals(c, new Colour(0.1, 0.1, 0.1));
+    }
+
+    @Test
+    @DisplayName("Ray striking a non-reflective surface")
+    public void nonReflectiveSurface()
+    {
+        World w = new DefaultWorld();
+        Ray r = new Ray(
+                new Point(0, 0, 0),
+                new Vector(0, 0, 1)
+        );
+        w.objects[1].material.ambient = 1;
+        Intersection i = new Intersection(w.objects[1], 1);
+        Computations c = i.prepareComputations(r);
+        Colour result = w.reflectedColour(c, 5);
+        Assertions.assertEquals(result, new Colour(0, 0, 0));
+    }
+
+    @Test
+    @DisplayName("Ray striking a reflective surface")
+    public void reflectiveSurface()
+    {
+        World w = new DefaultWorld();
+        ParentObject p = new Plane();
+        p.material.reflectiveness = 0.5;
+        p.transform = new TranslationMatrix(0, -1, 0);
+        w.objects = new ParentObject[]
+                {
+                        w.objects[0],
+                        w.objects[1],
+                        p
+                };
+        Ray r = new Ray(
+                new Point(0, 0, -3),
+                new Vector(0, -Math.sqrt(2)/2, Math.sqrt(2)/2)
+        );
+        Intersection i = new Intersection(p, Math.sqrt(2));
+        Computations c = i.prepareComputations(r);
+        Colour result = w.reflectedColour(c, 5);
+        Assertions.assertEquals(result, new Colour(0.19033, 0.23792, 0.14275));
+    }
+
+    @Test
+    @DisplayName("shadeHit function with a reflective material")
+    public void shadeHitReflective()
+    {
+        World w = new DefaultWorld();
+        ParentObject p = new Plane();
+        p.material.reflectiveness = 0.5;
+        p.transform = new TranslationMatrix(0, -1, 0);
+        w.objects = new ParentObject[]
+                {
+                        w.objects[0],
+                        w.objects[1],
+                        p
+                };
+        Ray r = new Ray(
+                new Point(0, 0, -3),
+                new Vector(0, -Math.sqrt(2)/2, Math.sqrt(2)/2)
+        );
+        Intersection i = new Intersection(p, Math.sqrt(2));
+        Computations c = i.prepareComputations(r);
+        Colour result = w.shadeHit(c, 5);
+        Assertions.assertEquals(result, new Colour(0.87676, 0.92434, 0.82917));
+    }
+
+    @Test
+    @DisplayName("colourAt with 'infinite' reflections.")
+    public void recursionOfReflections()
+    {
+        World w = new World();
+        w.light = new PointLight(
+                new Point(0, 0, 0),
+                new Colour(1, 1, 1)
+        );
+        ParentObject lowerMirror = new Plane();
+        lowerMirror.material.reflectiveness = 1;
+        lowerMirror.transform = new TranslationMatrix(0, -1, 0);
+        ParentObject upperMirror = new Plane();
+        upperMirror.material.reflectiveness = 1;
+        upperMirror.transform = new TranslationMatrix(0, 1, 0);
+        w.objects = new ParentObject[]
+                {
+                        lowerMirror,
+                        upperMirror
+                };
+        Ray r = new Ray(
+                new Point(0, 0, 0),
+                new Vector(0, 1, 0)
+        );
+        Assertions.assertDoesNotThrow(() -> w.colourAt(r, 5));
     }
 }
