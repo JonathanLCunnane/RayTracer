@@ -16,6 +16,7 @@ public class Material {
     public double diffuse; // The light reflected from a matte surface. Between 0 and 1.
     public double specular; // The reflection of the light source itself. Between 0 and 1.
     public double shininess; // The higher the shininess the smaller and tighter the specular highlight. Above 0. Recommended to be between 10 and 200.
+    public double reflectiveness; // The degree to which a material is reflective. Between 0 and 1.
     public Material()
     {
         colour = new Colour(1, 1, 1);
@@ -34,13 +35,14 @@ public class Material {
         return Double.compare(material.ambient, ambient) == 0 && Double.compare(material.diffuse, diffuse) == 0 && Double.compare(material.specular, specular) == 0 && Double.compare(material.shininess, shininess) == 0 && Objects.equals(colour, material.colour);
     }
 
-    public Material(Colour c, double a, double d, double sP, double sH)
+    public Material(Colour c, double a, double d, double sP, double sH, double r)
     {
         colour = c;
         ambient = a;
         diffuse = d;
         specular = sP;
         shininess = sH;
+        reflectiveness = r;
     }
 
     public Colour lightningAtPoint(PointLight light, Point point, Vector eyeV, Vector normalV, ParentObject object)
