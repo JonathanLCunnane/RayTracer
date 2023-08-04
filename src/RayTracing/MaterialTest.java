@@ -19,7 +19,8 @@ public class MaterialTest {
                 () -> Assertions.assertEquals(m.ambient, 0.1),
                 () -> Assertions.assertEquals(m.diffuse, 0.9),
                 () -> Assertions.assertEquals(m.specular, 0.9),
-                () -> Assertions.assertEquals(m.shininess, 200)
+                () -> Assertions.assertEquals(m.shininess, 200),
+                () -> Assertions.assertEquals(m.reflectiveness,0)
         );
     }
 
