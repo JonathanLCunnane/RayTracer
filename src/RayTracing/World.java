@@ -42,10 +42,10 @@ public class World {
         return xs;
     }
 
-    public Colour shadeHit(Computations c)
+    public Colour shadeHit(Computations c, int remainingIterations)
     {
         boolean inShadow = isInShadow(c.overPoint);
-        return c.object.material.lightningAtPoint(
+        Colour surfaceColour = c.object.material.lightningAtPoint(
                 light,
                 c.point,
                 c.eyeV,
@@ -53,15 +53,29 @@ public class World {
                 inShadow,
                 c.object
         );
+        Colour reflectedColour = reflectedColour(c, remainingIterations);
+        return surfaceColour.plus(reflectedColour);
     }
 
-    public Colour colourAt(Ray r)
+    public Colour colourAt(Ray r, int remainingIterations)
     {
         Intersections xs = intersections(r);
         Intersection i = xs.hit();
         if (i == null) return new Colour(0, 0, 0); // Black is returned if there is no object intersection
         Computations c = i.prepareComputations(r);
-        return shadeHit(c);
+        return shadeHit(c, remainingIterations);
+    }
+
+    public Colour reflectedColour(Computations c, int remainingIterations)
+    {
+        if (remainingIterations <= 0) return new Colour(0, 0, 0);
+        if (c.object.material.reflectiveness == 0) return new Colour(0, 0, 0);
+        Ray reflectedRay = new Ray(
+                c.overPoint,
+                c.reflectV
+        );
+        Colour colour = colourAt(reflectedRay, remainingIterations - 1);
+        return colour.scalarMultiply(c.object.material.reflectiveness);
     }
 
     public boolean isInShadow(Point p)
