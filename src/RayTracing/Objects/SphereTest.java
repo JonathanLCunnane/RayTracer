@@ -183,4 +183,16 @@ public class SphereTest {
         s.material = m;
         Assertions.assertEquals(s.material, m);
     }
+
+    @Test
+    @DisplayName("Default glass sphere")
+    public void defaultGlassSphere()
+    {
+        Sphere s = new GlassSphere();
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(s.transform, new IdentityMatrix(4)),
+                () -> Assertions.assertEquals(s.material.transparency, 1),
+                () -> Assertions.assertEquals(s.material.refractiveIndex, 1.52)
+        );
+    }
 }
