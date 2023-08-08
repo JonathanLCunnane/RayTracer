@@ -1,5 +1,8 @@
 package RayTracing;
 
+import Matrices.ScalingMatrix;
+import Matrices.TranslationMatrix;
+import RayTracing.Objects.GlassSphere;
 import RayTracing.Objects.ParentObject;
 import RayTracing.Objects.Plane;
 import RayTracing.Objects.Sphere;
@@ -78,5 +81,54 @@ public class IntersectionTest {
         Intersection i = new Intersection(p, Math.sqrt(2));
         Computations c = i.prepareComputations(r);
         Assertions.assertEquals(c.reflectV, new Vector(0, Math.sqrt(2)/2, Math.sqrt(2)/2));
+    }
+
+    @Test
+    @DisplayName("Preparing refraction computations works correctly")
+    public void refractionComputations()
+    {
+        Sphere a = new GlassSphere();
+        a.transform = new ScalingMatrix(2, 2, 2);
+        Sphere b = new GlassSphere();
+        b.transform = new TranslationMatrix(0, 0, -0.25);
+        b.material.refractiveIndex = 2;
+        Sphere c = new GlassSphere();
+        c.transform = new TranslationMatrix(0, 0, 0.25);
+        c.material.refractiveIndex = 2.5;
+        Ray r = new Ray(
+                new Point(0, 0, -4),
+                new Vector(0, 0, 1)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(a, 2),
+                                new Intersection(b, 2.75),
+                                new Intersection(c, 3.25),
+                                new Intersection(b, 4.75),
+                                new Intersection(c, 5.25),
+                                new Intersection(a, 6),
+                        }
+        );
+        double[][] results = new double[][]
+                {
+                        {1, 1.52},
+                        {1.52, 2},
+                        {2, 2.5},
+                        {2.5, 2.5},
+                        {2.5, 1.52},
+                        {1.52, 1},
+                };
+        Computations comps;
+        for (int i = 0; i < xs.size; i++)
+        {
+            comps = xs.intersections[i].prepareRefractionComputations(r, xs);
+            int finalI = i;
+            Computations finalComps = comps;
+            Assertions.assertAll(
+                    () -> Assertions.assertEquals(finalComps.nOne, results[finalI][0]),
+                    () -> Assertions.assertEquals(finalComps.nTwo, results[finalI][1])
+            );
+        }
     }
 }
