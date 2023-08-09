@@ -22,7 +22,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ThirdWorldRender {
-    // This render will use very squashes spheres for walls, as I have not yet implemented planes or cubes.
     public static void main(String[] args) throws IOException
     {
         World w = new World();
