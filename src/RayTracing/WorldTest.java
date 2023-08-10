@@ -3,6 +3,7 @@ package RayTracing;
 import Display.Colour;
 import Matrices.ScalingMatrix;
 import Matrices.TranslationMatrix;
+import RayTracing.Objects.GlassSphere;
 import RayTracing.Objects.ParentObject;
 import RayTracing.Objects.Plane;
 import RayTracing.Objects.Sphere;
@@ -379,5 +380,97 @@ public class WorldTest {
         Computations c = xs.intersections[0].prepareRefractionComputations(r, xs);
         Colour colour = w.shadeHit(c, 5);
         Assertions.assertEquals(colour, new Colour(0.93642, 0.68642, 0.68642));
+    }
+
+    @Test
+    @DisplayName("The Schlick approximation under total internal reflection.")
+    public void schlickTotalInternalReflection()
+    {
+        ParentObject s = new GlassSphere();
+        Ray r = new Ray(
+                new Point(0, 0, Math.sqrt(2)/2),
+                new Vector(0, 1, 0)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(s, -Math.sqrt(2)/2),
+                                new Intersection(s, Math.sqrt(2)/2)
+                        }
+        );
+        Computations c = xs.intersections[1].prepareRefractionComputations(r, xs);
+        Assertions.assertEquals(c.schlick(), 1);
+    }
+
+    @Test
+    @DisplayName("The Schlick approximation under is small with a perpendicular ray.")
+    public void schlickPerpendicularRay()
+    {
+        ParentObject s = new GlassSphere();
+        s.material.refractiveIndex = 1.5;
+        Ray r = new Ray(
+                new Point(0, 0, 0),
+                new Vector(0, 1, 0)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(s, -1),
+                                new Intersection(s, 1)
+                        }
+        );
+        Computations c = xs.intersections[1].prepareRefractionComputations(r, xs);
+        Assertions.assertTrue(Math.abs(c.schlick() - 0.04) < 0.00001);
+    }
+
+    @Test
+    @DisplayName("The Schlick approximation when nOne < nTwo and the angle if incidence is small.")
+    public void schlickParallelRay()
+    {
+        ParentObject s = new GlassSphere();
+        s.material.refractiveIndex = 1.5;
+        Ray r = new Ray(
+                new Point(0, 0.99, -2),
+                new Vector(0, 0, 1)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(s, 1.8589)
+                        }
+        );
+        Computations c = xs.intersections[0].prepareRefractionComputations(r, xs);
+        Assertions.assertTrue(Math.abs(c.schlick() - 0.48873) < 0.00001);
+    }
+
+    @Test
+    @DisplayName("The Schlick factor is properly used in shadeHit method")
+    public void schlickUsedShadeHit()
+    {
+        World w = new DefaultWorld();
+        Ray r = new Ray(
+                new Point(0, 0, -3),
+                new Vector(0, -Math.sqrt(2)/2, Math.sqrt(2)/2)
+        );
+        ParentObject floor = new Plane();
+        floor.transform = new TranslationMatrix(0, -1, 0);
+        floor.material.reflectiveness = 0.5;
+        floor.material.transparency = 0.5;
+        floor.material.refractiveIndex = 1.5;
+        ParentObject ball = new Sphere();
+        ball.material.colour = new Colour(1, 0, 0);
+        ball.material.ambient = 0.5;
+        ball.transform = new TranslationMatrix(0, -3.5, -0.5);
+        w.objects = new ParentObject[]
+                {
+                        w.objects[0],
+                        w.objects[1],
+                        floor,
+                        ball
+                };
+        Intersections xs = new Intersections(new Intersection[] {new Intersection(floor, Math.sqrt(2))});
+        Computations c = xs.intersections[0].prepareRefractionComputations(r, xs);
+        Colour colour = w.shadeHit(c, 5);
+        Assertions.assertEquals(colour, new Colour(0.93391, 0.69643, 0.69243));
     }
 }
