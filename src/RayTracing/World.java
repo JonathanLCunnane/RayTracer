@@ -55,6 +55,16 @@ public class World {
         );
         Colour reflectedColour = reflectedColour(c, remainingIterations);
         Colour refractedColour = refractedColour(c, remainingIterations);
+        if (c.object.material.reflectiveness > 0 && c.object.material.transparency > 0)
+        // An approximation of the Fresnel effect
+        {
+            double reflectance = c.schlick();
+            return surfaceColour.plus(
+                    reflectedColour.scalarMultiply(reflectance)
+            ).plus(
+                    refractedColour.scalarMultiply(1 - reflectance)
+            );
+        }
         return surfaceColour.plus(reflectedColour).plus(refractedColour);
     }
 
