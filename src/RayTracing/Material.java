@@ -17,8 +17,8 @@ public class Material {
     public double specular; // The reflection of the light source itself. Between 0 and 1.
     public double shininess; // The higher the shininess the smaller and tighter the specular highlight. Above 0. Recommended to be between 10 and 200.
     public double reflectiveness; // The degree to which the material is reflective. Between 0 and 1.
-    public double transparency; // The degree to which the material is transparent. Between 0 and 1.
-    public double refractiveIndex; // The ratio between the speed of light in a vacuum to in this material. Greater than or equal to 1.
+    public double transparency = 0; // The degree to which the material is transparent. Between 0 and 1.
+    public double refractiveIndex = 1; // The ratio between the speed of light in a vacuum to in this material. Greater than or equal to 1.
     public Material()
     {
         colour = new Colour(1, 1, 1);
@@ -28,8 +28,6 @@ public class Material {
         specular = 0.9;
         shininess = 200;
         reflectiveness = 0;
-        transparency = 0;
-        refractiveIndex = 1;
     }
 
     @Override
