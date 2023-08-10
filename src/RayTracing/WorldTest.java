@@ -6,6 +6,7 @@ import Matrices.TranslationMatrix;
 import RayTracing.Objects.ParentObject;
 import RayTracing.Objects.Plane;
 import RayTracing.Objects.Sphere;
+import RayTracing.Patterns.TestPattern;
 import Tuples.Point;
 import Tuples.Vector;
 import org.junit.jupiter.api.Assertions;
@@ -277,5 +278,106 @@ public class WorldTest {
                 new Vector(0, 1, 0)
         );
         Assertions.assertDoesNotThrow(() -> w.colourAt(r, 5));
+    }
+
+    @Test
+    @DisplayName("The refracted colour of an opaque surface")
+    public void opaqueRefraction()
+    {
+        World w = new DefaultWorld();
+        Ray r = new Ray(
+                new Point(0, 0, -5),
+                new Vector(0, 0, 1)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(w.objects[0], 4),
+                                new Intersection(w.objects[0], 4)
+                        }
+        );
+        Computations c = xs.intersections[0].prepareRefractionComputations(r, xs);
+        Colour colour = w.refractedColour(c, 5);
+        Assertions.assertEquals(colour, new Colour(0, 0, 0));
+    }
+
+    @Test
+    @DisplayName("The refracted colour under total internal reflection")
+    public void totalInternalReflection()
+    {
+        World w = new DefaultWorld();
+        w.objects[0].material.transparency = 1;
+        w.objects[0].material.refractiveIndex = 1.5;
+        Ray r = new Ray(
+                new Point(0, 0, Math.sqrt(2)/2),
+                new Vector(0, 1, 0)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(w.objects[0], -Math.sqrt(2)/2),
+                                new Intersection(w.objects[0], Math.sqrt(2)/2)
+                        }
+        );
+        Computations c = xs.intersections[1].prepareRefractionComputations(r, xs);
+        Colour colour = w.refractedColour(c, 5);
+        Assertions.assertEquals(colour, new Colour(0, 0, 0));
+    }
+
+    @Test
+    @DisplayName("The refracted colour of the refracted ray")
+    public void refractedColour()
+    {
+        World w = new DefaultWorld();
+        w.objects[0].material.ambient = 1;
+        w.objects[0].material.pattern = new TestPattern();
+        w.objects[1].material.transparency = 1;
+        w.objects[1].material.refractiveIndex = 1.5;
+        Ray r = new Ray(
+                new Point(0, 0, 0.1),
+                new Vector(0, 1, 0)
+        );
+        Intersections xs = new Intersections(
+                new Intersection[]
+                        {
+                                new Intersection(w.objects[0], -0.9899),
+                                new Intersection(w.objects[1], -0.4899),
+                                new Intersection(w.objects[1], 0.4899),
+                                new Intersection(w.objects[0], 0.9899)
+                        }
+        );
+        Computations c = xs.intersections[2].prepareRefractionComputations(r, xs);
+        Colour colour = w.refractedColour(c, 5);
+        Assertions.assertEquals(colour, new Colour(0, 0.99888, 0.04722));
+    }
+
+    @Test
+    @DisplayName("Shade hit with a transparent material")
+    public void transparentShadeHit()
+    {
+        World w = new DefaultWorld();
+        ParentObject floor = new Plane();
+        ParentObject ball = new Sphere();
+        ball.material.colour = new Colour(1, 0, 0);
+        ball.material.ambient = 0.5;
+        ball.transform = new TranslationMatrix(0, -3.5, -0.5);
+        floor.transform = new TranslationMatrix(0, -1, 0);
+        floor.material.transparency = 0.5;
+        floor.material.refractiveIndex = 1.5;
+        w.objects = new ParentObject[]
+                {
+                        w.objects[0],
+                        w.objects[1],
+                        floor,
+                        ball
+                };
+        Ray r = new Ray(
+                new Point(0, 0, -3),
+                new Vector(0, -Math.sqrt(2)/2, Math.sqrt(2)/2)
+        );
+        Intersections xs = new Intersections(new Intersection[] {new Intersection(floor, Math.sqrt(2))});
+        Computations c = xs.intersections[0].prepareRefractionComputations(r, xs);
+        Colour colour = w.shadeHit(c, 5);
+        Assertions.assertEquals(colour, new Colour(0.93642, 0.68642, 0.68642));
     }
 }
