@@ -19,6 +19,7 @@ public class Material {
     public double reflectiveness; // The degree to which the material is reflective. Between 0 and 1.
     public double transparency = 0; // The degree to which the material is transparent. Between 0 and 1.
     public double refractiveIndex = 1; // The ratio between the speed of light in a vacuum to in this material. Greater than or equal to 1.
+    public boolean castsShadow = true;
     public Material()
     {
         colour = new Colour(1, 1, 1);
@@ -38,7 +39,7 @@ public class Material {
         return Double.compare(material.ambient, ambient) == 0 && Double.compare(material.diffuse, diffuse) == 0 && Double.compare(material.specular, specular) == 0 && Double.compare(material.shininess, shininess) == 0 && Objects.equals(colour, material.colour);
     }
 
-    public Material(Colour c, double a, double d, double sP, double sH, double r) // Refractive index and transparency must be set manually.
+    public Material(Colour c, double a, double d, double sP, double sH, double r) // Refractive index, transparency, and castsShadow must be set manually.
     {
         colour = c;
         ambient = a;
