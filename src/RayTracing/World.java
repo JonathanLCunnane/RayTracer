@@ -113,6 +113,6 @@ public class World {
         Ray r = new Ray(light.position, lightToPNormalised);
         Intersection hit = intersections(r).hit();
         if (hit == null) return false;
-        return !(hit.time > distanceToPoint);
+        return (!(hit.time > distanceToPoint) && hit.object.material.castsShadow);
     }
 }
