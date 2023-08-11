@@ -191,8 +191,14 @@ public class SphereTest {
         Sphere s = new GlassSphere();
         Assertions.assertAll(
                 () -> Assertions.assertEquals(s.transform, new IdentityMatrix(4)),
-                () -> Assertions.assertEquals(s.material.transparency, 1),
-                () -> Assertions.assertEquals(s.material.refractiveIndex, 1.52)
+                () -> Assertions.assertEquals(s.material.transparency, 0.9),
+                () -> Assertions.assertEquals(s.material.reflectiveness, 0.9),
+                () -> Assertions.assertEquals(s.material.refractiveIndex, 1.52),
+                () -> Assertions.assertEquals(s.material.diffuse, 0.1),
+                () -> Assertions.assertEquals(s.material.ambient, 0.1),
+                () -> Assertions.assertEquals(s.material.specular, 1),
+                () -> Assertions.assertEquals(s.material.shininess, 300),
+                () -> Assertions.assertFalse(s.material.castsShadow)
         );
     }
 }
