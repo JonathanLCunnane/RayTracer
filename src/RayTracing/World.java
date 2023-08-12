@@ -115,4 +115,12 @@ public class World {
         if (hit == null) return false;
         return (!(hit.time > distanceToPoint) && hit.object.material.castsShadow);
     }
+
+    public void addObject(ParentObject o)
+    {
+        ParentObject[] newObjects = new ParentObject[objects.length + 1];
+        System.arraycopy(objects, 0, newObjects, 0, objects.length);
+        newObjects[objects.length] = o;
+        objects = newObjects;
+    }
 }
