@@ -81,10 +81,10 @@ public class FirstWorldRender {
                         middle,
                         right
                 };
-        w.light = new PointLight(
+        w.lights = new PointLight[] {new PointLight(
                 new Point(-10, 10, -10),
                 new Colour(1, 1, 1)
-        );
+        )};
 
         // Setup camera and render image
         Camera c = new Camera(1920, 1080, Math.PI/3);

@@ -66,10 +66,10 @@ public class SecondWorldRender {
                         middle,
                         right
                 };
-        w.light = new PointLight(
+        w.lights = new PointLight[] {new PointLight(
                 new Point(-10, 10, -10),
                 new Colour(0.988, 0.855, 0.941)
-        );
+        )};
 
         // Setup camera and render image
         Camera c = new Camera(1920, 1080, 2 * (Math.PI/3));

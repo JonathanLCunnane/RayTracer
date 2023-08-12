@@ -27,9 +27,13 @@ public class SixthWorldRender {
                 new Point(6, 0, 6),
                 new Vector(-0.45, 1, 0)
         ).viewTransform();
-        PointLight light = new PointLight(
+        PointLight lightOne = new PointLight(
                 new Point(50, 100, -50),
                 new Colour(1, 1, 1)
+        );
+        PointLight lightTwo = new PointLight(
+                new Point(-400, 50, -10),
+                new Colour(0.2, 0.2, 0.2)
         );
         Material whiteMaterial = new Material();
         whiteMaterial.colour = new Colour(1, 1, 1);
@@ -155,7 +159,7 @@ public class SixthWorldRender {
         cubeSeventeen.transform = new TranslationMatrix(-0.5, -4.5, 8).times(largeObject);
 
         World w = new World();
-        w.light = light;
+        w.lights = new PointLight[] {lightOne, lightTwo};
         w.objects = new ParentObject[]
                 {
                         background,

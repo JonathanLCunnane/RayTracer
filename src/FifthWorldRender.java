@@ -36,10 +36,10 @@ public class FifthWorldRender {
                         sphere
                 };
 
-        w.light = new PointLight(
+        w.lights = new PointLight[] {new PointLight(
                 new Point(15, 40, 5),
                 new Colour(1, 1, 1)
-        );
+        )};
 
         // Setup camera and render image.
         Camera c = new Camera(1024, 1024, Math.PI/3);

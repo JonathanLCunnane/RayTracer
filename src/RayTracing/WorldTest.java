@@ -22,7 +22,7 @@ public class WorldTest {
         World w = new World();
         Assertions.assertAll(
                 () -> Assertions.assertEquals(w.objects.length, 0),
-                () -> Assertions.assertNull(w.light)
+                () -> Assertions.assertArrayEquals(w.lights, new PointLight[]{})
         );
     }
 
@@ -46,7 +46,7 @@ public class WorldTest {
         sTwo.transform = new ScalingMatrix(0.5, 0.5, 0.5);
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(w.light, light),
+                () -> Assertions.assertEquals(w.lights[0], light),
                 () -> Assertions.assertTrue(w.contains(sOne)),
                 () -> Assertions.assertTrue(w.contains(sTwo))
         );
@@ -72,10 +72,10 @@ public class WorldTest {
     public void shadeHitInside()
     {
         World w = new DefaultWorld();
-        w.light = new PointLight(
+        w.lights = new PointLight[] {new PointLight(
                 new Point(0, 0.25, 0),
                 new Colour(1, 1, 1)
-        );
+        )};
         Ray r = new Ray(
                 new Point(0, 0, 0),
                 new Vector(0, 0, 1)
@@ -170,10 +170,10 @@ public class WorldTest {
     public void shadeHitInShadow()
     {
         World w = new World();
-        w.light = new PointLight(
+        w.lights = new PointLight[] {new PointLight(
                 new Point(0, 0, -10),
                 new Colour(1, 1, 1)
-        );
+        )};
         Sphere second = new Sphere();
         second.transform = new TranslationMatrix(0, 0, 10);
         w.objects = new ParentObject[]
@@ -259,10 +259,10 @@ public class WorldTest {
     public void recursionOfReflections()
     {
         World w = new World();
-        w.light = new PointLight(
+        w.lights = new PointLight[] {new PointLight(
                 new Point(0, 0, 0),
                 new Colour(1, 1, 1)
-        );
+        )};
         ParentObject lowerMirror = new Plane();
         lowerMirror.material.reflectiveness = 1;
         lowerMirror.transform = new TranslationMatrix(0, -1, 0);
