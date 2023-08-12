@@ -9,18 +9,24 @@ import java.util.Objects;
 
 public class World {
     public ParentObject[] objects;
-    public PointLight light;
+    public PointLight[] lights;
 
     public World()
     {
         objects = new ParentObject[] {};
-        light = null;
+        lights = new PointLight[] {};
     }
 
     public World(ParentObject[] objs, PointLight lightSource)
     {
         objects = objs;
-        light = lightSource;
+        lights = new PointLight[] {lightSource};
+    }
+
+    public World(ParentObject[] objs, PointLight[] lightSources)
+    {
+        objects = objs;
+        lights = lightSources;
     }
 
     public boolean contains(ParentObject object)
@@ -44,28 +50,33 @@ public class World {
 
     public Colour shadeHit(Computations c, int remainingIterations)
     {
-        boolean inShadow = isInShadow(c.overPoint);
-        Colour surfaceColour = c.object.material.lightningAtPoint(
-                light,
-                c.point,
-                c.eyeV,
-                c.normalV,
-                inShadow,
-                c.object
-        );
-        Colour reflectedColour = reflectedColour(c, remainingIterations);
-        Colour refractedColour = refractedColour(c, remainingIterations);
-        if (c.object.material.reflectiveness > 0 && c.object.material.transparency > 0)
-        // An approximation of the Fresnel effect
+        Colour sum = new Colour(0, 0, 0);
+        for (PointLight light: lights)
         {
-            double reflectance = c.schlick();
-            return surfaceColour.plus(
-                    reflectedColour.scalarMultiply(reflectance)
-            ).plus(
-                    refractedColour.scalarMultiply(1 - reflectance)
+            boolean inShadow = isInShadow(c.overPoint, light);
+            Colour surfaceColour = c.object.material.lightningAtPoint(
+                    light,
+                    c.point,
+                    c.eyeV,
+                    c.normalV,
+                    inShadow,
+                    c.object
             );
+            Colour reflectedColour = reflectedColour(c, remainingIterations);
+            Colour refractedColour = refractedColour(c, remainingIterations);
+            if (c.object.material.reflectiveness > 0 && c.object.material.transparency > 0)
+            // An approximation of the Fresnel effect
+            {
+                double reflectance = c.schlick();
+                return surfaceColour.plus(
+                        reflectedColour.scalarMultiply(reflectance)
+                ).plus(
+                        refractedColour.scalarMultiply(1 - reflectance)
+                );
+            }
+            sum = sum.plus(surfaceColour.plus(reflectedColour).plus(refractedColour));
         }
-        return surfaceColour.plus(reflectedColour).plus(refractedColour);
+        return sum;
     }
 
     public Colour colourAt(Ray r, int remainingIterations)
@@ -105,7 +116,18 @@ public class World {
         return colour.scalarMultiply(c.object.material.transparency);
     }
 
-    public boolean isInShadow(Point p)
+    public boolean isInShadow(Point p) // Uses the first light in lights.
+    {
+        Vector lightToP = new Vector(p.minus(lights[0].position));
+        double distanceToPoint = lightToP.magnitude();
+        Vector lightToPNormalised = lightToP.scalarDivide(distanceToPoint);
+        Ray r = new Ray(lights[0].position, lightToPNormalised);
+        Intersection hit = intersections(r).hit();
+        if (hit == null) return false;
+        return (!(hit.time > distanceToPoint) && hit.object.material.castsShadow);
+    }
+
+    public boolean isInShadow(Point p, PointLight light)
     {
         Vector lightToP = new Vector(p.minus(light.position));
         double distanceToPoint = lightToP.magnitude();
